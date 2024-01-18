@@ -10,6 +10,31 @@
     "requirements": null,
     "ociimage": "",
     "version": "0.2.0",
-    "environment": [],
+    "environment": {
+        "ACCOUNT_NUMBER": {
+            "type": "text",
+            "description": "Bank Account Number",
+            "defval": "",
+            "required": true
+        },
+        "CERT_PASS": {
+            "type": "password",
+            "description": "Certificate password",
+            "defval": "",
+            "required": true
+        },
+        "STATEMENT_IMPORT_SCOPE": {
+            "type": "text",
+            "description": "Time scope of transactions downloaded",
+            "defval": "auto",
+            "required": true
+        },
+        "XIBMCLIENTID": {
+            "type": "text",
+            "description": "ClientID",
+            "defval": "",
+            "required": true
+        }
+    },
     "multiflexi": "1.10.2.0"
 }

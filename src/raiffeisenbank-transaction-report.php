@@ -1,7 +1,7 @@
 <?php
 
 /**
- * RaiffeisenBank - Statements downloader.
+ * RaiffeisenBank - Transaction Reporter.
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.com>
  * @copyright  (C) 2024 Spoje.Net
