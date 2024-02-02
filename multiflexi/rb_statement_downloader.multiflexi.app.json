@@ -23,6 +23,12 @@
             "defval": "",
             "required": true
         },
+        "CERT_FILE": {
+            "type": "string",
+            "description": "Path to RB Certificate file",
+            "defval": "",
+            "required": true
+        },
         "STATEMENT_IMPORT_SCOPE": {
             "type": "text",
             "description": "Time scope of transactions downloaded",
