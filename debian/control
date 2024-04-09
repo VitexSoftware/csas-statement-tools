@@ -18,5 +18,3 @@ Architecture: all
 Depends: raiffeisenbank-statement-downloader, multiflexi
 Description: Raiffeisen Bank statement downloader to MultiFlexi
  Allow use of Raiffeisen Bank statement downloader in MultiFlexi environment
-
-
