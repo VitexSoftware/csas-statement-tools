@@ -3,8 +3,8 @@ Raiffeisenbank Statement Downloader
 
 ![raiffeisenbank-statement-downloader](raiffeisenbank-statement-downloader.svg?raw=true)
 
-Usage
------
+Statement Downloader
+--------------------
 
 ```shell
 raiffeisenbank-statement-downloader [save/to/directory] [format] [path/to/.env]
@@ -19,25 +19,96 @@ Example output when EASE_LOGGER=console
 
 ```
 
+Balance Check
+-------------
+
+```shell
+raiffeisenbank-balance [path/to/.env]
+```
+
+Example output:
+
+```json
+{
+    "numberPart2": "635814116",
+    "bankCode": "5500",
+    "currencyFolders": [
+        {
+            "currency": "CZK",
+            "status": "ACTIVE",
+            "balances": [
+                {
+                    "balanceType": "CLAB",
+                    "currency": "CZK",
+                    "value": 5883.89
+                },
+                {
+                    "balanceType": "CLBD",
+                    "currency": "CZK",
+                    "value": 5883.89
+                },
+                {
+                    "balanceType": "CLAV",
+                    "currency": "CZK",
+                    "value": 20853.89
+                },
+                {
+                    "balanceType": "BLCK",
+                    "currency": "CZK",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "currency": "EUR",
+            "status": "ACTIVE",
+            "balances": [
+                {
+                    "balanceType": "CLAB",
+                    "currency": "EUR",
+                    "value": 133.76
+                },
+                {
+                    "balanceType": "CLBD",
+                    "currency": "EUR",
+                    "value": 133.76
+                },
+                {
+                    "balanceType": "CLAV",
+                    "currency": "EUR",
+                    "value": 133.76
+                },
+                {
+                    "balanceType": "BLCK",
+                    "currency": "EUR",
+                    "value": 0
+                }
+            ]
+        }
+    ]
+}
+```
+
 Configuration
 -------------
 
 Please set this environment variables or specify path to .env file
 
-* `CERT_FILE`='RAIFF_CERT.p12'
-* `CERT_PASS`=CertPass
-* `XIBMCLIENTID`=PwX4XXXXXXXXXXv6I
-* `ACCOUNT_NUMBER`=666666666
-* `ACCOUNT_CURRENCY`=CZK
-* `STATEMENT_FORMAT`=pdf | xml | MT940
-* `STATEMENT_LINE`=MAIN
-* `STATEMENT_IMPORT_SCOPE`=last_two_months
-* `STATEMENTS_DIR`=~/Documents/
+```env
+CERT_FILE='RAIFF_CERT.p12'
+CERT_PASS=CertPass
+XIBMCLIENTID=PwX4XXXXXXXXXXv6I
+ACCOUNT_NUMBER=666666666
+ACCOUNT_CURRENCY=CZK
+STATEMENT_FORMAT=pdf | xml | MT940
+STATEMENT_LINE=MAIN
+STATEMENT_IMPORT_SCOPE=last_two_months
+STATEMENTS_DIR=~/Documents/
+API_DEBUG=True
+APP_DEBUG=True
+EASE_LOGGER=syslog|eventlog|console
+```
 
-
-* `API_DEBUG`=True
-* `APP_DEBUG`=True
-* `EASE_LOGGER`=syslog|eventlog|console
 
 Availble Import Scope Values
 ----------------------------
@@ -63,3 +134,11 @@ Availble Import Scope Values
 * 'December'
 
 Created using the library [php-rbczpremiumapi](https://github.com/VitexSoftware/php-vitexsoftware-rbczpremiumapi)
+
+MultiFlexi
+----------
+
+**Raiffeisenbank Statement Downloader** is ready for run as [MultiFlexi](https://multiflexi.eu) application.
+See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
+
+[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)

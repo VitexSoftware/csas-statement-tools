@@ -6,7 +6,7 @@
     "setup": "",
     "cmdparams": "",
     "deploy": "apt install raiffeisenbank-statement-downloader",
-    "homepage": "Download your Statements to directory ",
+    "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-downloader",
     "requirements": null,
     "ociimage": "",
     "version": "0.2.0",

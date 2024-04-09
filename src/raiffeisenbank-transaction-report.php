@@ -27,6 +27,7 @@ if (\Ease\Shared::cfg('APP_DEBUG', false)) {
 }
 $engine->setScope(Shared::cfg('STATEMENT_IMPORT_SCOPE', 'last_month'));
 $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'MAIN'));
+
 $payments = [
     'source' => \Ease\Logger\Message::getCallerName($engine),
     'account' => Shared::cfg('ACCOUNT_NUMBER'),
