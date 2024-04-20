@@ -30,7 +30,7 @@ Example output when EASE_LOGGER=console
 Statement mailer
 ----------------
 
-![raiffeisenbank-statement-downloader](raiffeisenbank-statement-downloader.svg?raw=true)
+![raiffeisenbank-statement-downloader](raiffeisenbank-statement-mailer.svg?raw=true)
 
 Download bank statements for the required period in the required format and send it by email
 
