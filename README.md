@@ -1,10 +1,18 @@
 Raiffeisenbank Statement Downloader
 ===================================
 
-![raiffeisenbank-statement-downloader](raiffeisenbank-statement-downloader.svg?raw=true)
+A set of tools for downloading and subsequent operations with Raiffaissenbank bank statements
+
+[![View raiffeisenbank-statement-downloader on GitHub](https://img.shields.io/github/stars/Spoje-NET/raiffeisenbank-statement-downloader?color=232323&label=raiffeisenbank-statement-downloader&logo=github&labelColor=232323)](https://github.com/Spoje-NET/raiffeisenbank-statement-downloader) 
+[![Author Spoje-NET](https://img.shields.io/badge/Spoje-NET-b820f9?labelColor=b820f9&logo=githubsponsors&logoColor=fff)](https://github.com/Spoje-NET) ![Written in PHP](https://img.shields.io/static/v1?label=&message=PHP&color=777BB4&logo=php&logoColor=FFFFFF)
+
 
 Statement Downloader
 --------------------
+
+![raiffeisenbank-statement-downloader](raiffeisenbank-statement-downloader.svg?raw=true)
+
+Download bank statements for the required period in the required format to the specified or current folder
 
 ```shell
 raiffeisenbank-statement-downloader [save/to/directory] [format] [path/to/.env]
@@ -17,6 +25,17 @@ Example output when EASE_LOGGER=console
 12/01/2023 16:37:13 🌼 ❲RaiffeisenBank Statement Downloader⦒123@VitexSoftware\Raiffeisenbank\Statementor❳ 10_2023_123_3780381_CZK_2023-11-01.xml saved
 12/01/2023 16:37:13 ℹ ❲RaiffeisenBank Statement Downloader⦒123456789@VitexSoftware\Raiffeisenbank\Statementor❳ Download done. 1 of 1 saved
 
+```
+
+Statement mailer
+----------------
+
+![raiffeisenbank-statement-downloader](raiffeisenbank-statement-downloader.svg?raw=true)
+
+Download bank statements for the required period in the required format and send it by email
+
+```shell
+raiffeisenbank-statement-mailer <recipient@domain,[recipient1@domain,...]> [format] [path/to/.env]
 ```
 
 Balance Check
@@ -201,6 +220,8 @@ STATEMENTS_DIR=~/Documents/
 API_DEBUG=True
 APP_DEBUG=True
 EASE_LOGGER=syslog|eventlog|console
+SEND_MAIL_TO=statement@recipient.com
+EASE_FROM=statements@service.com
 ```
 
 

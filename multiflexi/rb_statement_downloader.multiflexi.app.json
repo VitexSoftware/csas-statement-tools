@@ -9,7 +9,7 @@
     "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-downloader",
     "requirements": null,
     "ociimage": "",
-    "version": "0.2.0",
+    "topics": "RaiffeisenBank,Statements,Downloader",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",
@@ -33,6 +33,18 @@
             "type": "text",
             "description": "Time scope of transactions downloaded",
             "defval": "auto",
+            "required": true
+        },
+        "STATEMENTS_DIR": {
+            "type": "text",
+            "description": "Time scope of transactions downloaded",
+            "defval": "auto",
+            "required": true
+        },
+        "STATEMENT_FORMAT": {
+            "type": "text",
+            "description": "pdf or xml",
+            "defval": "pdf",
             "required": true
         },
         "XIBMCLIENTID": {

@@ -9,7 +9,7 @@
     "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-downloader",
     "requirements": null,
     "ociimage": "",
-    "version": "0.2.0",
+    "topics": "RaiffeisenBank,Balance,Check,Json",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",
