@@ -38,13 +38,23 @@ if (empty($statements) === false) {
     );
 
     if ($downloaded) {
-        $recipient = array_key_exists(1, $argv) ? $argv[1] : Shared::cfg('SEND_MAIL_TO');
+        $recipient = array_key_exists(1, $argv) ? $argv[1] : Shared::cfg('STATEMENTS_TO');
         if (empty($recipient)) {
             fwrite(fopen('php://stderr', 'wb'), \Ease\Shared::appName() . ': ' . _('No recipient provided! Check arguments or environment') . PHP_EOL);
             exit(1);
         } else {
             try {
                 $mailer = new \Ease\Mailer($recipient, sprintf(_('Bank Statements %s'), \Ease\Shared::cfg('ACCOUNT_NUMBER')));
+                $headers = [];
+                if(\Ease\Shared::cfg('STATEMENTS_FROM')){
+                    $headers['From'] = \Ease\Shared::cfg('STATEMENTS_FROM');
+                } else {
+                    $mailer->addStatusMessage('💌  The From header not set','warning');
+                }
+                if(\Ease\Shared::cfg('STATEMENTS_REPLYTO')){
+                    $headers['Reply-To'] = \Ease\Shared::cfg('STATEMENTS_REPLYTO');
+                }
+                $mailer->setMailHeaders($headers);
                 $mailer->addText(sprintf(_('Statements from %s to %s'), $engine->getSince()->format(Statementor::$dateFormat), $engine->getUntil()->format(Statementor::$dateFormat)) . "\n\n");
                 foreach ($statements as $stId => $statement) {
                     $mailer->addText(_('Statement') . ' ' . strval($stId + 1) . "\n");
