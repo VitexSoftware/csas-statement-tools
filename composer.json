@@ -1,6 +1,6 @@
 {
-    "name": "spojenet/raiffeisenbank-statement-downloader",
-    "description": "raiffeisenbank bank statement downloader for Stormware Pohoda",
+    "name": "spojenet/raiffeisenbank-statement-tools",
+    "description": "raiffeisenbank bank statement tools",
     "license": "MIT",
     "authors": [
         {
@@ -9,7 +9,10 @@
         }
     ],
     "minimum-stability": "dev",
-    "bin": ["src/raiffeisenbank-statement-downloader.php"],
+    "bin": [
+        "src/raiffeisenbank-statement-downloader.php"
+        "src/raiffeisenbank-statement-mailer.php"
+    ],
     "require": {
         "vitexsoftware/rbczpremiumapi": "dev-main"
     }

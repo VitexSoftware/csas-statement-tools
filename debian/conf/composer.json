@@ -1,8 +1,7 @@
 {
-  "name": "spojenet/raiffeisenbank-statement-downloader",
-  "description": "raiffeisenbank  account statement downloader for AbraFlexi",
+  "name": "spojenet/raiffeisenbank-statement-tools",
+  "description": "raiffeisenbank  account statement tools",
   "license": "MIT",
-  "version": "0.2.0",
   "authors": [
     {
       "name": "Vítězslav Dvořák",
@@ -10,6 +9,7 @@
     }
   ],
   "require": {
+    "deb/ease-core": "*",
     "deb/abraflexi": "*",
     "deb/rbczpremiumapi": "*"
   },

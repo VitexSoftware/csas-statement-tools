@@ -13,3 +13,10 @@
 /debian/raiffeisenbank-statement-downloader.debhelper.log
 /debian/files
 /debian/multiflexi-raiffeisenbank-statement-downloader/
+/debian/multiflexi-raiffeisenbank-statement-tools.debhelper.log
+/debian/raiffeisenbank-statement-tools.debhelper.log
+/debian/multiflexi-raiffeisenbank-statement-tools.substvars
+/debian/raiffeisenbank-statement-tools.substvars
+/debian/multiflexi-raiffeisenbank-statement-tools/
+/debian/raiffeisenbank-statement-tools/
+/raiffeisenbank-statement-mailer.phar

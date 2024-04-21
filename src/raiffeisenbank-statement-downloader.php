@@ -19,6 +19,7 @@ define('APP_NAME', 'RaiffeisenBank Statement Downloader');
 
 if (array_key_exists(1, $argv) && $argv[1] == '-h') {
     echo 'raiffeisenbank-statement-downloader [save/to/directory] [format] [path/to/.env]';
+    echo "\n";
     exit;
 }
 
