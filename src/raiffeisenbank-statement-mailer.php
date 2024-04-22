@@ -55,6 +55,9 @@ if (empty($statements) === false) {
                 if(\Ease\Shared::cfg('STATEMENTS_REPLYTO')){
                     $headers['Reply-To'] = \Ease\Shared::cfg('STATEMENTS_REPLYTO');
                 }
+                if(\Ease\Shared::cfg('STATEMENTS_CC')){
+                    $headers['Cc'] = \Ease\Shared::cfg('STATEMENTS_CC');
+                }
                 $mailer->setMailHeaders($headers);
                 $mailer->addText(sprintf(_('Statements from %s to %s'), $engine->getSince()->format(Statementor::$dateFormat), $engine->getUntil()->format(Statementor::$dateFormat)) . "\n\n");
                 foreach ($statements as $stId => $statement) {

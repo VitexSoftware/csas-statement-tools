@@ -220,8 +220,12 @@ STATEMENTS_DIR=~/Documents/
 API_DEBUG=True
 APP_DEBUG=True
 EASE_LOGGER=syslog|eventlog|console
-SEND_MAIL_TO=statement@recipient.com
-EASE_FROM=statements@service.com
+
+#Mailer specific:
+STATEMENTS_TO=statement@recipient.com
+STATEMENTS_FROM=email@address.com
+STATEMENTS_REPLYTO=email@address.com
+STATEMENTS_CC=email@address.com
 ```
 
 
