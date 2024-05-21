@@ -20,7 +20,7 @@ const APP_NAME = 'RaiffeisenBankBalance';
  * Get today's transactons list
  */
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], isset($argv[1]) ? $argv[1] : '../.env');
-ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'));
+ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true);
 $apiInstance = new \VitexSoftware\Raiffeisenbank\PremiumAPI\GetAccountBalanceApi();
 $xRequestId = time();
 try {

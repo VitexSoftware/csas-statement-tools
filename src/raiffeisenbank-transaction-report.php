@@ -18,7 +18,7 @@ require_once('../vendor/autoload.php');
 define('APP_NAME', 'RaiffeisenBank Statement Reporter');
 
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], array_key_exists(3, $argv) ? $argv[3] : '../.env');
-ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'));
+ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true);
 $engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
 $engine->setScope(Shared::cfg('STATEMENT_IMPORT_SCOPE', 'last_month'));
 

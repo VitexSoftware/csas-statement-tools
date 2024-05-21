@@ -10,7 +10,7 @@
     ],
     "minimum-stability": "dev",
     "bin": [
-        "src/raiffeisenbank-statement-downloader.php"
+        "src/raiffeisenbank-statement-downloader.php",
         "src/raiffeisenbank-statement-mailer.php"
     ],
     "require": {
