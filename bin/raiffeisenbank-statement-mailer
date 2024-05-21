@@ -1,4 +1,2 @@
 #!/bin/bash
-php -f /usr/lib/raiffeisenbank-statement-downloader/raiffeisenbank-statement-mailer.php -- $@
-
-
+php -f /usr/lib/raiffeisenbank-statement-tools/raiffeisenbank-statement-mailer.php -- $@
