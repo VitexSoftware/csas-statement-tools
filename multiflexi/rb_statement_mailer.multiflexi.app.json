@@ -9,6 +9,7 @@
     "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-tools",
     "requirements": null,
     "ociimage": "",
+    "uuid": "b50fe50c-4dab-419e-815e-dcd95bbeb29e",
     "version": "0.2.0",
     "topics": "RaiffeisenBank,Mail,Statements",
     "environment": {

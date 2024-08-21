@@ -9,6 +9,7 @@
     "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-tools",
     "requirements": null,
     "ociimage": "",
+    "uuid": "97f30cf9-2d9e-4d91-ad65-9bdd8b4663cd",
     "topics": "RaiffeisenBank,Transactions,Check,Json",
     "environment": {
         "ACCOUNT_NUMBER": {

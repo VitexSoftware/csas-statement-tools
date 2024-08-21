@@ -10,6 +10,7 @@
     "requirements": null,
     "ociimage": "",
     "topics": "RaiffeisenBank,Balance,Check,Json",
+    "uuid": "491e066a-a47b-4266-99b9-ea21032fa6e2",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",
