@@ -16,3 +16,6 @@ override_dh_install:
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/rb_transaction_report.multiflexi.app.json |sponge debian/multiflexi-raiffeisenbank-statement-tools/usr/lib/raiffeisenbank-statement-tools/multiflexi/rb_transaction_report.multiflexi.app.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/rb_statement_downloader.multiflexi.app.json |sponge debian/multiflexi-raiffeisenbank-statement-tools/usr/lib/raiffeisenbank-statement-tools/multiflexi/rb_statement_downloader.multiflexi.app.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/rb_balance.multiflexi.app.json |sponge debian/multiflexi-raiffeisenbank-statement-tools/usr/lib/raiffeisenbank-statement-tools/multiflexi/rb_balance.multiflexi.app.json
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/rb_statement_mailer.multiflexi.app.json |sponge debian/multiflexi-raiffeisenbank-statement-tools/usr/lib/raiffeisenbank-statement-tools/multiflexi/rb_statement_mailer.multiflexi.app.json
+
+
