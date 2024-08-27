@@ -76,7 +76,7 @@ if (empty($statements) === false) {
                     }
                 }
                 $mailer->send();
-            } catch (Exception $exc) {
+            } catch (\Exception $exc) {
             }
         }
     }

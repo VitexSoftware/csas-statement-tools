@@ -35,7 +35,14 @@
             "description": "ClientID",
             "defval": "",
             "required": true
+        },
+        "RESULT_FILE": {
+            "type": "string",
+            "description": "write output json data to",
+            "defval": "transaction_report.json",
+            "required": false
         }
+        
     },
     "multiflexi": "1.10.2.0"
 }

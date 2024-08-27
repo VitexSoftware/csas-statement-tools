@@ -19,13 +19,24 @@ const APP_NAME = 'RaiffeisenBankBalance';
 /**
  * Get today's transactons list
  */
-Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], isset($argv[1]) ? $argv[1] : '../.env');
+$options = getopt("o::e::", ['output::environment::']);
+Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], array_key_exists('environment', $options) ? $options['environment'] : '../.env');
+$destination = array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
+
 ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true);
+
+$engine = new \Ease\Sand();
+if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+    $engine->logBanner();
+}
+
 $apiInstance = new \VitexSoftware\Raiffeisenbank\PremiumAPI\GetAccountBalanceApi();
 $xRequestId = time();
 try {
-    $result = $apiInstance->getBalance($xRequestId, Shared::cfg('ACCOUNT_NUMBER'));
-    echo json_encode($result, JSON_PRETTY_PRINT);
-} catch (Exception $e) {
+    $balance = $apiInstance->getBalance($xRequestId, Shared::cfg('ACCOUNT_NUMBER'));
+} catch (\Exception $e) {
     echo 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage(), PHP_EOL;
+    $balance = ['message' => 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage()];
 }
+
+$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), file_put_contents($destination, json_encode($balance, \Ease\Shared::cfg('DEBUG') ? JSON_PRETTY_PRINT : 0)) ? 'success' : 'error');

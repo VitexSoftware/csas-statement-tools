@@ -116,8 +116,9 @@ Transaction Report
 ![raiffeisenbank-transaction-report](raiffeisenbank-transaction-report.svg?raw=true)
 
 ```shell
-raiffeisenbank-transaction-report  [path/to/.env]
+raiffeisenbank-transaction-report --output="/tmp/transaction_report.json" [--environment="path/to/.env"]
 ```
+(the default output is stdout)
 
 Example output:
 

@@ -20,3 +20,4 @@
 /debian/multiflexi-raiffeisenbank-statement-tools/
 /debian/raiffeisenbank-statement-tools/
 /raiffeisenbank-statement-mailer.phar
+/.php-cs-fixer.cache

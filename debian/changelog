@@ -1,8 +1,15 @@
-raiffeisenbank-statement-tools (1.0.1) UNRELEASED; urgency=medium
+raiffeisenbank-statement-tools (1.1.0) UNRELEASED; urgency=medium
 
+  * Write reports to file if specified
+
+ --  <vitezslav.dvorak@spojenet.cz>  Tue, 27 Aug 2024 20:50:02 +0200
+
+raiffeisenbank-statement-tools (1.0.1) unstable; urgency=medium
+
+  [ vitezslav.dvorak@spojenet.cz ]
   * launcher paths fixed
 
- --  <vitezslav.dvorak@spojenet.cz>  Tue, 21 May 2024 16:50:08 +0200
+ --  <vitezslav.dvorak@spojenet.cz>  Tue, 27 Aug 2024 20:49:37 +0200
 
 raiffeisenbank-statement-tools (1.0.0) unstable; urgency=low
 
