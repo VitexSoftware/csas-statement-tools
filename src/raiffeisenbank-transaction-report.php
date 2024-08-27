@@ -64,4 +64,6 @@ if (empty($statements) === false) {
     $payments['status'] = "no statements returned";
 }
 
-$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), file_put_contents($destination, json_encode($payments, \Ease\Shared::cfg('DEBUG') ? JSON_PRETTY_PRINT : 0)) ? 'success' : 'error');
+$written = file_put_contents($destination, json_encode($payments, \Ease\Shared::cfg('DEBUG') ? JSON_PRETTY_PRINT : 0));
+$engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
+exit($written ? 0 : 1);
