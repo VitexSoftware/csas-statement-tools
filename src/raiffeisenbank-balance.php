@@ -17,7 +17,7 @@ require_once('../vendor/autoload.php');
 const APP_NAME = 'RaiffeisenBankBalance';
 
 /**
- * Get today's transactons list
+ * Get today's transactions list
  */
 $options = getopt("o::e::", ['output::environment::']);
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], array_key_exists('environment', $options) ? $options['environment'] : '../.env');
