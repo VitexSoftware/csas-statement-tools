@@ -33,8 +33,8 @@
         "STATEMENT_IMPORT_SCOPE": {
             "type": "text",
             "description": "Time scope of transactions downloaded",
-            "defval": "auto",
-            "required": true
+            "defval": "last_month",
+            "required": false
         },
         "XIBMCLIENTID": {
             "type": "text",
