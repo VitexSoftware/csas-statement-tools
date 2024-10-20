@@ -1,8 +1,15 @@
-raiffeisenbank-statement-tools (1.2.0) UNRELEASED; urgency=medium
+raiffeisenbank-statement-tools (1.2.1) UNRELEASED; urgency=medium
 
+  * svg fix
+
+ -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2024 17:50:10 +0200
+
+raiffeisenbank-statement-tools (1.2.0) unstable; urgency=medium
+
+  [ vitezslav.dvorak@spojenet.cz ]
   * strict types, report update
 
- --  <vitezslav.dvorak@spojenet.cz>  Fri, 13 Sep 2024 13:33:59 +0200
+ -- vitex <info@vitexsoftware.cz>  Sun, 20 Oct 2024 17:49:58 +0200
 
 raiffeisenbank-statement-tools (1.1.0) unstable; urgency=medium
 
