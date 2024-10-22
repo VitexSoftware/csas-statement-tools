@@ -120,6 +120,8 @@ raiffeisenbank-transaction-report --output="/tmp/transaction_report.json" [--env
 ```
 (the default output is stdout)
 
+>> Note: The Chosen `STATEMENT_LINE` must support statement frequency for `REPORT_SCOPE` 
+
 Example output:
 
 ```json
