@@ -29,13 +29,13 @@ $destination = \array_key_exists('output', $options) ? $options['output'] : \Eas
 
 ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true);
 $engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
-$engine->setScope(Shared::cfg('IMPORT_SCOPE', 'yesterday'));
+$engine->setScope(Shared::cfg('REPORT_SCOPE', 'yesterday'));
 
 if (\Ease\Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
-$statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'MAIN'));
+$statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'ADDITIONAL'));
 
 $payments = [
     'source' => \Ease\Logger\Message::getCallerName($engine),
