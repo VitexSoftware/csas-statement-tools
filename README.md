@@ -258,6 +258,14 @@ Availble Import Scope Values
 Created using the library [php-rbczpremiumapi](https://github.com/VitexSoftware/php-vitexsoftware-rbczpremiumapi)
 
 
+MultiFlexi
+----------
+
+**Raiffeisenbank Statement Downloader** is ready for run as [MultiFlexi](https://multiflexi.eu) application.
+See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
+
+[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
+
 Installation
 ------------
 
@@ -270,11 +278,3 @@ echo "deb [signed-by=/etc/apt/trusted.gpg.d/vitexsoftware.gpg]  https://repo.vit
 sudo apt update
 sudo apt install raiffeisenbank-statement-tools
 ```
-
-MultiFlexi
-----------
-
-**Raiffeisenbank Statement Downloader** is ready for run as [MultiFlexi](https://multiflexi.eu) application.
-See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
-
-[![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
