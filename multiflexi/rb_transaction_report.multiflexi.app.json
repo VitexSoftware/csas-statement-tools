@@ -36,6 +36,12 @@
             "defval": "last_month",
             "required": false
         },
+        "STATEMENT_LINE": {
+            "type": "text",
+            "description": "Statement line can be MAIN or ADDITIONAL",
+            "defval": "ADDITIONAL",
+            "required": false
+        },
         "XIBMCLIENTID": {
             "type": "text",
             "description": "ClientID",

@@ -49,6 +49,12 @@
             "defval": "pdf",
             "required": true
         },
+        "STATEMENT_LINE": {
+            "type": "text",
+            "description": "Statement line can be MAIN or ADDITIONAL",
+            "defval": "MAIN",
+            "required": false
+        },
         "STATEMENTS_DIR": {
             "type": "directory",
             "description": "Time scope of transactions downloaded",

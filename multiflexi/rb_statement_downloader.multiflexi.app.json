@@ -30,7 +30,7 @@
             "defval": "",
             "required": true
         },
-        "STATEMENT_IMPORT_SCOPE": {
+        "IMPORT_SCOPE": {
             "type": "text",
             "description": "Time scope of transactions downloaded",
             "defval": "auto",
@@ -47,6 +47,12 @@
             "description": "pdf or xml",
             "defval": "pdf",
             "required": true
+        },
+        "STATEMENT_LINE": {
+            "type": "text",
+            "description": "Statement line can be MAIN or ADDITIONAL",
+            "defval": "MAIN",
+            "required": false
         },
         "XIBMCLIENTID": {
             "type": "text",
