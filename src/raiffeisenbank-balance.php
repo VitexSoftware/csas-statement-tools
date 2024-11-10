@@ -20,10 +20,10 @@ use VitexSoftware\Raiffeisenbank\ApiClient;
 
 require_once '../vendor/autoload.php';
 
-const APP_NAME = 'RaiffeisenBankBalance';
+define('APP_NAME','RaiffeisenBankBalance');
 
 /**
- * Get today's transactons list.
+ * Get today's transactions list.
  */
 $options = getopt('o::e::', ['output::environment::']);
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
@@ -32,6 +32,7 @@ $destination = \array_key_exists('output', $options) ? $options['output'] : \Eas
 ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true);
 
 $engine = new \Ease\Sand();
+$engine->setObjectName(Shared::cfg('ACCOUNT_NUMBER'));
 
 if (\Ease\Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner();

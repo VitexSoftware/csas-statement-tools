@@ -233,6 +233,7 @@ STATEMENTS_CC=email@address.com
 
 
 Availble Import Scope Values
+
 ----------------------------
 
 * 'yesterday'
