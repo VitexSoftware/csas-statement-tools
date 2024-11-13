@@ -39,10 +39,15 @@
         "RESULT_FILE": {
             "type": "string",
             "description": "write output json data to",
-            "defval": "transaction_report.json",
+            "defval": "account_balance_{ACCOUNT_NUMBER}.json",
+            "required": false
+        },
+        "ZABBIX_KEY": {
+            "type": "string",
+            "description": "Default name for Zabbix Item key name",
+            "defval": "Raiff-Balance-{ACCOUNT_NUMBER}",
             "required": false
         }
-        
     },
     "multiflexi": "1.10.2.0"
 }
