@@ -27,19 +27,33 @@ $options = getopt('o::e::', ['output::environment::']);
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
 $destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
 
-ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true);
 $engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
+
+if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === false) {
+    $engine->addStatusMessage(sprintf(_('Certificate file %s problem'), Shared::cfg('CERT_FILE')), 'error');
+
+    exit(1);
+}
+
 $engine->setScope(Shared::cfg('REPORT_SCOPE', 'yesterday'));
 
 if (\Ease\Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
-$statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'ADDITIONAL'));
+try {
+    $status = 'ok';
+    $exitcode = 0;
+    $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'ADDITIONAL'));
+} catch (\VitexSoftware\Raiffeisenbank\ApiException $exc) {
+    $status = $exc->getCode().': error';
+    $exitcode = (int) $exc->getCode();
+}
 
 $payments = [
     'source' => \Ease\Logger\Message::getCallerName($engine),
     'account' => Shared::cfg('ACCOUNT_NUMBER'),
+    'status' => $status,
     'in' => [],
     'out' => [],
     'in_total' => 0,
@@ -70,10 +84,12 @@ if (empty($statements) === false) {
         unlink($xmlFile);
     }
 } else {
-    $payments['status'] = 'no statements returned';
+    if ($exitcode === 0) {
+        $payments['status'] = 'no statements returned';
+    }
 }
 
 $written = file_put_contents($destination, json_encode($payments, \Ease\Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
 $engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
-exit($written ? 0 : 1);
+exit($exitcode ?: ($written ? 0 : 2));

@@ -205,6 +205,15 @@ Example output:
 }
 ```
 
+Exit Codes
+----------
+
+0: success - report sent
+1: certificate file problem
+2: error saving report
+4xx: Permission Denied
+5xx: Server error
+
 Configuration
 -------------
 
