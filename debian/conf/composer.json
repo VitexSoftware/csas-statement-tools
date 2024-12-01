@@ -10,7 +10,6 @@
   ],
   "require": {
     "deb/ease-core": "*",
-    "deb/abraflexi": "*",
     "deb/rbczpremiumapi": "*"
   },
   "autoload": {
