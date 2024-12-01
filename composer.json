@@ -8,18 +8,18 @@
             "email": "info@vitexsoftware.cz"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "bin": [
         "src/raiffeisenbank-statement-downloader.php",
         "src/raiffeisenbank-statement-mailer.php"
     ],
     "require": {
-        "vitexsoftware/rbczpremiumapi": "dev-main"
+        "vitexsoftware/rbczpremiumapi": "^1.2"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",
-        "friendsofphp/php-cs-fixer": "^3.61",
+        "friendsofphp/php-cs-fixer": "^3.65",
         "ergebnis/composer-normalize": "^2.43",
         "ergebnis/php-cs-fixer-config": "^6.34"
     },

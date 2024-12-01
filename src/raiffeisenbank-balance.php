@@ -25,34 +25,37 @@ require_once '../vendor/autoload.php';
 /**
  * Get today's transactions list.
  */
+$written = 0;
+$exitcode = 0;
 $options = getopt('o::e::', ['output::environment::']);
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
-$destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
+$destination = \array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout');
 
 $engine = new \Ease\Sand();
 $engine->setObjectName(Shared::cfg('ACCOUNT_NUMBER'));
 
-if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === false) {
-    $engine->addStatusMessage(sprintf(_('Certificate file %s problem'), Shared::cfg('CERT_FILE')), 'error');
-
-    exit(1);
-}
-
-if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+if (Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
-$apiInstance = new \VitexSoftware\Raiffeisenbank\PremiumAPI\GetAccountBalanceApi();
-$xRequestId = time();
+if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === false) {
+    $engine->addStatusMessage(sprintf(_('Certificate file %s problem'), Shared::cfg('CERT_FILE')), 'error');
 
-try {
-    $balance = $apiInstance->getBalance($xRequestId, Shared::cfg('ACCOUNT_NUMBER'));
-} catch (\Exception $e) {
-    echo 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage(), \PHP_EOL;
-    $balance = ['message' => 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage()];
+    $exitcode = 1;
+} else {
+    $apiInstance = new \VitexSoftware\Raiffeisenbank\PremiumAPI\GetAccountBalanceApi();
+    $xRequestId = strval(time());
+
+    try {
+        $balance = $apiInstance->getBalance($xRequestId, Shared::cfg('ACCOUNT_NUMBER'));
+        $written = file_put_contents($destination, json_encode($balance, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+
+    } catch (\Exception $e) {
+        echo 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage(), \PHP_EOL;
+        $balance = ['message' => 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage()];
+        $exitcode = 3;
+    }
 }
-
-$written = file_put_contents($destination, json_encode($balance, \Ease\Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
 
 $engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 

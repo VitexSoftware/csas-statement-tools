@@ -25,7 +25,7 @@ require_once '../vendor/autoload.php';
 
 $options = getopt('o::e::', ['output::environment::']);
 Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
-$destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
+$destination = \array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout');
 
 $engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
 
@@ -37,7 +37,7 @@ if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === fals
 
 $engine->setScope(Shared::cfg('REPORT_SCOPE', 'yesterday'));
 
-if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+if (Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
@@ -89,7 +89,7 @@ if (empty($statements) === false) {
     }
 }
 
-$written = file_put_contents($destination, json_encode($payments, \Ease\Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+$written = file_put_contents($destination, json_encode($payments, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
 $engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
 exit($exitcode ?: ($written ? 0 : 2));
