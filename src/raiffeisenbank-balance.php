@@ -44,19 +44,24 @@ if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === fals
     $exitcode = 1;
 } else {
     $apiInstance = new \VitexSoftware\Raiffeisenbank\PremiumAPI\GetAccountBalanceApi();
-    $xRequestId = strval(time());
+    $xRequestId = (string) time();
 
     try {
         $balance = $apiInstance->getBalance($xRequestId, Shared::cfg('ACCOUNT_NUMBER'));
         $written = file_put_contents($destination, json_encode($balance, Shared::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+    } catch (\VitexSoftware\Raiffeisenbank\ApiException $exc) {
+        $report['mesage'] = $exc->getMessage();
 
-    } catch (\Exception $e) {
-        echo 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage(), \PHP_EOL;
-        $balance = ['message' => 'Exception when calling GetAccountBalanceApi->getBalance: ', $e->getMessage()];
-        $exitcode = 3;
+        $exitcode = $exc->getCode();
+
+        if (!$exitcode) {
+            if (preg_match('/cURL error ([0-9]*):/', $report['mesage'], $codeRaw)) {
+                $exitcode = (int) $codeRaw[1];
+            }
+        }
     }
 }
 
 $engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
-exit($exitcode ? $exitcode : ($written ? 0 : 2));
+exit($exitcode ?: ($written ? 0 : 2));
