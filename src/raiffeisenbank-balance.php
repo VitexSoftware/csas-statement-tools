@@ -59,6 +59,11 @@ if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE')) === false) {
                 $exitcode = (int) $codeRaw[1];
             }
         }
+    } catch (\InvalidArgumentException $exc) {
+        $report['mesage'] = $exc->getMessage();
+
+        $exitcode = 400;
+        
     }
 }
 
