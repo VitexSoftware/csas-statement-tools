@@ -38,7 +38,7 @@ if (Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
-if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === false) {
+if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE')) === false) {
     $engine->addStatusMessage(sprintf(_('Certificate file %s problem'), Shared::cfg('CERT_FILE')), 'error');
 
     $exitcode = 1;
