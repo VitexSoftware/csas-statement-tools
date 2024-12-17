@@ -55,6 +55,12 @@
             "defval": "MAIN",
             "required": false
         },
+        "ACCOUNT_CURRENCY": {
+            "type": "text",
+            "description": "for multicurrency accounts please specify one",
+            "defval": "CZK",
+            "required": false
+        },
         "STATEMENTS_DIR": {
             "type": "directory",
             "description": "Time scope of transactions downloaded",
