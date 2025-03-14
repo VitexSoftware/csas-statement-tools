@@ -1,11 +1,11 @@
 #!/bin/sh
-# prerm script for multiflexi-raiffeisenbank-statement-tools
+# prerm script for multiflexi-csas-statement-tools
 set -e
 . /usr/share/debconf/confmodule
 case "$1" in
     remove)
-        APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
-        for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
+        APPLICATION=$(echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//')
+        for file in $(ls /usr/lib/$APPLICATION/multiflexi/*.json)
         do
           multiflexi-json-app-remover $file
         done

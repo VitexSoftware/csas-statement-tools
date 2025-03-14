@@ -1,0 +1,2 @@
+#!/bin/bash
+php -f /usr/lib/csas-statement-tools/csas-statement-mailer.php -- $@

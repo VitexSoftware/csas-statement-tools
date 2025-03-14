@@ -1,15 +1,15 @@
 {
     "image": "",
     "name": "RB Balance",
-    "description": "Raiffeisenbank Balance check",
-    "executable": "raiffeisenbank-balance",
+    "description": "Csas Balance check",
+    "executable": "csas-balance",
     "setup": "",
     "cmdparams": "",
-    "deploy": "apt install raiffeisenbank-statement-tools",
-    "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-tools",
-    "requirements": "RaiffeisenBank",
+    "deploy": "apt install csas-statement-tools",
+    "homepage": "https://github.com/Spoje-NET/csas-statement-tools",
+    "requirements": "Csas",
     "ociimage": "",
-    "topics": "RaiffeisenBank,Balance,Check,Json",
+    "topics": "Csas,Balance,Check,Json",
     "uuid": "491e066a-a47b-4266-99b9-ea21032fa6e2",
     "environment": {
         "ACCOUNT_NUMBER": {

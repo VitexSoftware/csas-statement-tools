@@ -1,16 +1,16 @@
 {
     "image": "",
     "name": "RB statement mailer",
-    "description": "Download Raiffeisenbank statements in given format and send it via email",
-    "executable": "raiffeisenbank-statement-mailer",
+    "description": "Download Csas statements in given format and send it via email",
+    "executable": "csas-statement-mailer",
     "setup": "",
     "cmdparams": "",
-    "deploy": "apt install raiffeisenbank-statement-tools",
-    "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-tools",
-    "requirements": "RaiffeisenBank",
+    "deploy": "apt install csas-statement-tools",
+    "homepage": "https://github.com/Spoje-NET/csas-statement-tools",
+    "requirements": "Csas",
     "ociimage": "",
     "uuid": "b50fe50c-4dab-419e-815e-dcd95bbeb29e",
-    "topics": "RaiffeisenBank,Mail,Statements",
+    "topics": "Csas,Mail,Statements",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",

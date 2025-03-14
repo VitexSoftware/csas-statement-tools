@@ -1,16 +1,16 @@
 {
     "image": "",
     "name": "RB transaction report",
-    "description": "Raiffeisenbank transaction report",
-    "executable": "raiffeisenbank-transaction-report",
+    "description": "Csas transaction report",
+    "executable": "csas-transaction-report",
     "setup": "",
     "cmdparams": "",
-    "deploy": "apt install raiffeisenbank-statement-tools",
-    "homepage": "https://github.com/Spoje-NET/raiffeisenbank-statement-tools",
-    "requirements": "RaiffeisenBank",
+    "deploy": "apt install csas-statement-tools",
+    "homepage": "https://github.com/Spoje-NET/csas-statement-tools",
+    "requirements": "Csas",
     "ociimage": "",
     "uuid": "97f30cf9-2d9e-4d91-ad65-9bdd8b4663cd",
-    "topics": "Bank,RaiffeisenBank,Transactions,Check,Json,Report",
+    "topics": "Bank,Csas,Transactions,Check,Json,Report",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",

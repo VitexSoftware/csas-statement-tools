@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="console-application">
-  <id>io.github.spoje_net.raiffeisenbank_statement_tools</id>
+  <id>io.github.spoje_net.csas_statement_tools</id>
   
-  <name>Raiffeisenbank Statement Downloader</name>
+  <name>Csas Statement Downloader</name>
   <summary> Download your Statements to directory </summary>
   
   <metadata_license>MIT</metadata_license>
@@ -14,7 +14,7 @@
     </p>
   </description>
   
-  <icon type="stock">raiffeisenbank-statement-downloader</icon>
+  <icon type="stock">csas-statement-downloader</icon>
   
   <categories>
     <category>System</category>
@@ -22,7 +22,6 @@
   </categories>
   
   <provides>
-    <binary>raiffeisenbank-statement-downloader</binary>
+    <binary>csas-statement-downloader</binary>
   </provides>
 </component>
-

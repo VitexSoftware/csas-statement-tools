@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the RaiffeisenBank Statement Tools package
+ * This file is part of the CSas Statement Tools package
  *
- * https://github.com/Spoje-NET/pohoda-raiffeisenbank
+ * https://github.com/VitexSoftware/csas-statement-tools
  *
- * (c) Spoje.Net IT s.r.o. <https://spojenet.cz>
+ * (c) Vítězslav Dvořák <info@vitexsoftware.cz>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -18,11 +18,11 @@ use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php81;
 
 $header = <<<'HEADER'
-This file is part of the RaiffeisenBank Statement Tools package
+This file is part of the CSas Statement Tools package
 
-https://github.com/Spoje-NET/pohoda-raiffeisenbank
+https://github.com/VitexSoftware/csas-statement-tools
 
-(c) Spoje.Net IT s.r.o. <https://spojenet.cz>
+(c) Vítězslav Dvořák <info@vitexsoftware.cz>
 
 For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
