@@ -1,15 +1,15 @@
 {
     "image": "",
-    "name": "RB transaction report",
-    "description": "Csas transaction report",
+    "name": "ČSas transaction report",
+    "description": "CSas transaction report",
     "executable": "csas-transaction-report",
     "setup": "",
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
-    "homepage": "https://github.com/Spoje-NET/csas-statement-tools",
+    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
     "requirements": "Csas",
     "ociimage": "",
-    "uuid": "97f30cf9-2d9e-4d91-ad65-9bdd8b4663cd",
+    "uuid": "d82ef26e-2bfc-4171-ad92-4eae643a5249",
     "topics": "Bank,Csas,Transactions,Check,Json,Report",
     "environment": {
         "ACCOUNT_NUMBER": {

@@ -6,27 +6,15 @@
     "setup": "",
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
-    "homepage": "https://github.com/Spoje-NET/csas-statement-tools",
+    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
     "requirements": "Csas",
     "ociimage": "",
     "topics": "Csas,Statements,Downloader",
-    "uuid": "b6add5c1-67a5-4332-8fe2-12bff71062e6",
+    "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",
             "description": "Bank Account Number",
-            "defval": "",
-            "required": true
-        },
-        "CERT_PASS": {
-            "type": "password",
-            "description": "Certificate password",
-            "defval": "",
-            "required": true
-        },
-        "CERT_FILE": {
-            "type": "string",
-            "description": "Path to RB Certificate file",
             "defval": "",
             "required": true
         },
@@ -48,30 +36,48 @@
             "defval": "pdf",
             "required": true
         },
-        "STATEMENT_LINE": {
-            "type": "text",
-            "description": "Statement line can be MAIN or ADDITIONAL",
-            "defval": "MAIN",
-            "required": false
-        },
         "ACCOUNT_CURRENCY": {
             "type": "text",
             "description": "for multicurrency accounts please specify one",
             "defval": "CZK",
             "required": false
         },
-        "XIBMCLIENTID": {
-            "type": "text",
-            "description": "ClientID",
-            "defval": "",
-            "required": true
-        },
         "EASE_LOGGER": {
             "type": "string",
             "description": "write log messages using",
             "defval": "console|syslog",
             "required": false
+        },
+        "CSAS_ACCOUNT_IBAN": {
+            "type": "text",
+            "description": "IBAN of the CSAS account",
+            "hint": "CZ1208000000000259459101",
+            "required": true
+        },
+        "CSAS_API_KEY": {
+            "type": "text",
+            "description": "API key for CSAS",
+            "hint": "c5f91ec2-0237-4af2-9f90-c8366e209ff8",
+            "required": true
+        },
+        "CSAS_SANDBOX_MODE": {
+            "type": "boolean",
+            "description": "Enable sandbox mode for CSAS",
+            "defval": false,
+            "required": false
+        },
+        "CSAS_ACCESS_TOKEN": {
+            "type": "text",
+            "description": "Access token for CSAS",
+            "hint": "ewogICJ0eXBlIjogInRva2VuIiwKICAibmFtZSI6ICI4MDAwLTAxLTAxLTAwLjAwLjAwLjAwMDAwMSIsCiAgInNlc3Npb25VVUlEIjogIjZlNjRjZjU0LTNjZWQtNGRjYy04NTViLTgyZDc3OGM4NDA0NSIsCiAgInNjb3BlcyI6IFsKICAgICJzaWJsaW5ncy5hY2NvdW50cyIKICBdLAogICJjb25zZW50IjogWwogICAgewogICAgICAiaWQiOiAiMDAwMDAiLAogICAgICAiY29udGVudCI6ICJmdWxsIgogICAgfQogIF0sCiAgImxpbWl0cyI6IHsKICAgICJhY2Nlc3NTZWNvbmRzIjogMzAwLAogICAgInJlZnJlc2hTZWNvbmRzIjogMTU1NTIwMDAKICB9LAogICJhY2Nlc3NUeXBlIjogIm9mZmxpbmUiLAogICJleHBpcmF0aW9uIjogIjIwMjUtMDMtMTdUMTk6MDg6NDYuNjU2WiIKfQ==",
+            "required": true
+        },
+        "CSAS_ACCOUNT_UUID": {
+            "type": "text",
+            "description": "UUID of the CSAS account",
+            "hint": "AA195E7DB499B4D9F48D46C208625FF53F2245F7",
+            "required": true
         }
     },
-    "multiflexi": "1.10.2.0"
+    "multiflexi": "1.30"
 }
