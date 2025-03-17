@@ -18,45 +18,17 @@
             "defval": "",
             "required": true
         },
-        "CERT_PASS": {
-            "type": "password",
-            "description": "Certificate password",
-            "defval": "",
-            "required": true
-        },
-        "CERT_FILE": {
-            "type": "string",
-            "description": "Path to RB Certificate file",
-            "defval": "",
-            "required": true
-        },
         "REPORT_SCOPE": {
             "type": "text",
             "description": "Time scope of transactions downloaded",
             "defval": "last_month",
             "required": false
         },
-        "STATEMENT_LINE": {
-            "type": "select",
-            "description": "Bank Statement line",
-	    "defval": "ADDITIONAL",
-            "hint": "MAIN",
-            "options": {
-                "MAIN": "Main statement line",
-                "ADDITIONAL": "Additional statement line" 
-            }
-        },
         "ACCOUNT_CURRENCY": {
             "type": "text",
             "description": "for multicurrency accounts please specify one",
             "defval": "CZK",
             "required": false
-        },
-        "XIBMCLIENTID": {
-            "type": "text",
-            "description": "ClientID",
-            "defval": "",
-            "required": true
         },
         "RESULT_FILE": {
             "type": "string",

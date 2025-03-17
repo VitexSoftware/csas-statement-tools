@@ -10,7 +10,7 @@
   ],
   "require": {
     "deb/ease-core": "*",
-    "deb/rbczpremiumapi": "*"
+    "deb/csas-accountsapi": "*"
   },
   "autoload": {
     "psr-4": {

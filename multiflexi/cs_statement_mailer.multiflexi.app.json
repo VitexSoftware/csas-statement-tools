@@ -1,16 +1,16 @@
 {
     "image": "",
-    "name": "RB statement downloader",
-    "description": "Download Csas statements in given format",
-    "executable": "csas-statement-downloader",
+    "name": "RB statement mailer",
+    "description": "Download Csas statements in given format and send it via email",
+    "executable": "csas-statement-mailer",
     "setup": "",
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
     "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
     "requirements": "Csas",
     "ociimage": "",
-    "topics": "Csas,Statements,Downloader",
-    "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
+    "uuid": "bd700603-7a49-431c-8e30-97dbf1bddb41",
+    "topics": "Csas,Mail,Statements",
     "environment": {
         "ACCOUNT_NUMBER": {
             "type": "text",
@@ -31,9 +31,21 @@
             "required": true
         },
         "STATEMENT_FORMAT": {
-            "type": "text",
+            "type": "select",
             "description": "pdf or xml",
             "defval": "pdf",
+            "options": {
+                "pdf": "PDF",
+                "xml": "XML",
+                "xml-data": "XML Data",
+                "abo-standard": "ABO Standard",
+                "abo-internal": "ABO Internal",
+                "abo-standard-extended": "ABO Standard Extended",
+                "abo-internal-extended": "ABO Internal Extended",
+                "csv-comma": "CSV Comma",
+                "csv-semicolon": "CSV Semicolon",
+                "mt940": "MT940"
+            },
             "required": true
         },
         "ACCOUNT_CURRENCY": {
@@ -77,7 +89,25 @@
             "description": "UUID of the CSAS account",
             "hint": "AA195E7DB499B4D9F48D46C208625FF53F2245F7",
             "required": true
+        },
+        "STATEMENTS_TO": {
+            "type": "email",
+            "description": "Recipient's email address",
+            "defval": "",
+            "required": true
+        },
+        "STATEMENTS_FROM": {
+            "type": "email",
+            "description": "Sender's email address",
+            "defval": "",
+            "required": false
+        },
+        "STATEMENTS_REPLYTO": {
+            "type": "email",
+            "description": "Reply-To email address",
+            "defval": "",
+            "required": false
         }
     },
-    "multiflexi": "1.30"
+    "multiflexi": "1.10.2.0"
 }
