@@ -24,31 +24,22 @@ require_once '../vendor/autoload.php';
 \define('APP_NAME', 'CSas Statement Reporter');
 
 $options = getopt('o::e::', ['output::environment::']);
-Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists('environment', $options) ? $options['environment'] : '../.env');
-$destination = \array_key_exists('output', $options) ? $options['output'] : Shared::cfg('RESULT_FILE', 'php://stdout');
+\Ease\Shared::init(
+        ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
+        \array_key_exists('environment', $options) ? $options['environment'] : '../.env',
+);
+$destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
 
-$engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
+$engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_UUID'), Shared::cfg('CSAS_ACCOUNT_IBAN'), Shared::cfg('IMPORT_SCOPE', 'yesterday'));
 
-if (Shared::cfg('STATEMENT_LINE')) {
-    $engine->setStatementLine(Shared::cfg('STATEMENT_LINE'));
-}
-
-if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === false) {
-    $engine->addStatusMessage(sprintf(_('Certificate file %s problem'), Shared::cfg('CERT_FILE')), 'error');
-
-    exit(1);
-}
-
-$engine->setScope(Shared::cfg('REPORT_SCOPE', 'yesterday'));
-
-if (Shared::cfg('APP_DEBUG', false)) {
-    $engine->logBanner($engine->get);
+if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+    $engine->logBanner( $engine->getAccountNumber().' '.$engine->getScopeSymbolic());
 }
 
 try {
     $status = 'ok';
     $exitcode = 0;
-    $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'ADDITIONAL'));
+    $statements = $engine->getStatements(Shared::cfg('STATEMENT_FORMAT', 'xml'));
 } catch (\VitexSoftware\CSas\ApiException $exc) {
     $status = $exc->getCode().': error';
     $exitcode = (int) $exc->getCode();
@@ -56,7 +47,7 @@ try {
 
 $payments = [
     'source' => \Ease\Logger\Message::getCallerName($engine),
-    'account' => Shared::cfg('ACCOUNT_NUMBER'),
+    'account' => $engine->getAccountNumber(),
     'status' => $status,
     'in' => [],
     'out' => [],
