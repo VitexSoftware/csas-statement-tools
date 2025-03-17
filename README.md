@@ -3,8 +3,8 @@
 
 A set of tools for downloading and subsequent operations with Raiffaissenbank bank statements
 
-[![View csas-statement-downloader on GitHub](https://img.shields.io/github/stars/Spoje-NET/csas-statement-downloader?color=232323&label=csas-statement-downloader&logo=github&labelColor=232323)](https://github.com/Spoje-NET/csas-statement-downloader) 
-[![Author Spoje-NET](https://img.shields.io/badge/Spoje-NET-b820f9?labelColor=b820f9&logo=githubsponsors&logoColor=fff)](https://github.com/Spoje-NET) ![Written in PHP](https://img.shields.io/static/v1?label=&message=PHP&color=777BB4&logo=php&logoColor=FFFFFF)
+[![View csas-statement-tools on GitHub](https://img.shields.io/github/stars/VitexSoftware/csas-statement-tools?color=232323&label=csas-statement-tools&logo=github&labelColor=232323)](https://github.com/Vitexsoftware/csas-statement-tools) 
+[![Author Spoje-NET](https://img.shields.io/badge/VitexSoftware-b820f9?labelColor=b820f9&logo=githubsponsors&logoColor=fff)](https://github.com/VitexSoftware) ![Written in PHP](https://img.shields.io/static/v1?label=&message=PHP&color=777BB4&logo=php&logoColor=FFFFFF)
 
 
 Statement Downloader
@@ -30,7 +30,7 @@ Example output when EASE_LOGGER=console
 Statement mailer
 ----------------
 
-![csas-statement-downloader](csas-statement-mailer.svg?raw=true)
+![csas-statement-mailer](csas-statement-mailer.svg?raw=true)
 
 Download bank statements for the required period in the required format and send it by email
 
@@ -226,13 +226,13 @@ Availble Import Scope Values
 * 'November',
 * 'December'
 
-Created using the library [php-rbczpremiumapi](https://github.com/VitexSoftware/php-vitexsoftware-rbczpremiumapi)
+Created using the library [php-csas-accountsapi](https://github.com/Spoje-NET/php-csas-accountsapi)
 
 
 MultiFlexi
 ----------
 
-**Csas Statement Downloader** is ready for run as [MultiFlexi](https://multiflexi.eu) application.
+**Csas Statement Tools** is ready for run as [MultiFlexi](https://multiflexi.eu) application.
 See the full list of ready-to-run applications within the MultiFlexi platform on the [application list page](https://www.multiflexi.eu/apps.php).
 
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)

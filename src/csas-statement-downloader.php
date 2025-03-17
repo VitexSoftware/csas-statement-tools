@@ -16,8 +16,6 @@ declare(strict_types=1);
 namespace SpojeNet\CSas;
 
 use Ease\Shared;
-use VitexSoftware\CSas\ApiClient;
-use VitexSoftware\CSas\Statementor;
 
 require_once '../vendor/autoload.php';
 
@@ -30,35 +28,33 @@ if (\array_key_exists(1, $argv) && $argv[1] === '-h') {
     exit;
 }
 
-Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists(3, $argv) ? $argv[3] : '../.env');
-$engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
+$options = getopt('o::e::', ['output::environment::']);
+\Ease\Shared::init(
+        ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
+        \array_key_exists('environment', $options) ? $options['environment'] : '../.env',
+);
+$destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
+
+$engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_UUID'), Shared::cfg('CSAS_ACCOUNT_IBAN'), Shared::cfg('IMPORT_SCOPE', 'last_month'));
 
 if (\Ease\Shared::cfg('APP_DEBUG', false)) {
-    $engine->logBanner();
+    $engine->logBanner( $engine->getAccountNumber().' '.$engine->getScopeSymbolic());
 }
-
-if (ApiClient::checkCertificatePresence(Shared::cfg('CERT_FILE'), true) === false) {
-    $engine->addStatusMessage(sprintf(_('Certificate file %s problem'), Shared::cfg('CERT_FILE')), 'error');
-
-    exit(1);
-}
-
-$engine->setScope(Shared::cfg('STATEMENT_IMPORT_SCOPE', 'last_month'));
 
 try {
     $status = 'ok';
     $exitcode = 0;
-    $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'MAIN'));
+    $statements = $engine->getStatements(Shared::cfg('STATEMENT_FORMAT', 'pdf'));
 } catch (\VitexSoftware\CSas\ApiException $exc) {
-    $status = $exc->getCode().': error';
+    $status = $exc->getCode() . ': error';
     $exitcode = (int) $exc->getCode();
 }
 
 if (empty($statements) === false) {
     $engine->download(
-        \array_key_exists(1, $argv) ? $argv[1] : Shared::cfg('STATEMENTS_DIR', getcwd()),
-        $statements,
-        \array_key_exists(2, $argv) ? $argv[2] : Shared::cfg('STATEMENT_FORMAT', 'pdf'),
+            \array_key_exists(1, $argv) ? $argv[1] : Shared::cfg('STATEMENTS_DIR', getcwd()),
+            $statements,
+            \array_key_exists(2, $argv) ? $argv[2] : Shared::cfg('STATEMENT_FORMAT', 'pdf'),
     );
 } else {
     echo "no statements returned\n";

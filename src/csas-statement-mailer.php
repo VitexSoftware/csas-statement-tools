@@ -16,8 +16,6 @@ declare(strict_types=1);
 namespace SpojeNet\CSas;
 
 use Ease\Shared;
-use VitexSoftware\CSas\ApiClient;
-use VitexSoftware\CSas\Statementor;
 
 require_once '../vendor/autoload.php';
 
@@ -30,8 +28,13 @@ if (\array_key_exists(1, $argv) && $argv[1] === '-h') {
     exit;
 }
 
-Shared::init(['CERT_FILE', 'CERT_PASS', 'XIBMCLIENTID', 'ACCOUNT_NUMBER'], \array_key_exists(3, $argv) ? $argv[3] : '../.env');
-$engine = new Statementor(Shared::cfg('ACCOUNT_NUMBER'));
+$options = getopt('o::e::', ['output::environment::']);
+\Ease\Shared::init(
+    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_IBAN'],
+    \array_key_exists('environment', $options) ? $options['environment'] : '../.env',
+);
+$destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
+$engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_IBAN'));
 $engine->setScope(Shared::cfg('IMPORT_SCOPE', 'yesterday'));
 
 if (Shared::cfg('APP_DEBUG', false)) {
