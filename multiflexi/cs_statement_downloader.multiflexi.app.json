@@ -1,6 +1,6 @@
 {
     "image": "",
-    "name": "RB statement downloader",
+    "name": "ČSas statement downloader",
     "description": "Download Csas statements in given format",
     "executable": "csas-statement-downloader",
     "setup": "",

@@ -16,7 +16,6 @@ declare(strict_types=1);
 namespace SpojeNet\CSas;
 
 use Ease\Shared;
-use VitexSoftware\CSas\Statementor;
 
 require_once '../vendor/autoload.php';
 
@@ -59,7 +58,7 @@ $payments = [
 ];
 
 if (empty($statements) === false) {
-    $payments['status'] = 'statement '.$statements[0]->statementId;
+    //$payments['status'] = 'statement '.$statements[0]->statementId;
 
     foreach ($engine->download(sys_get_temp_dir(), $statements, 'xml') as $statement => $xmlFile) {
         // ISO 20022 XML to transaction array

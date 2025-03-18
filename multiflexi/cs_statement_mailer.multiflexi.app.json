@@ -1,6 +1,6 @@
 {
     "image": "",
-    "name": "RB statement mailer",
+    "name": "ČSas statement mailer",
     "description": "Download Csas statements in given format and send it via email",
     "executable": "csas-statement-mailer",
     "setup": "",
