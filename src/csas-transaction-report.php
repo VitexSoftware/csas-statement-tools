@@ -16,7 +16,6 @@ declare(strict_types=1);
 namespace SpojeNet\CSas;
 
 use Ease\Shared;
-use VitexSoftware\CSas\ApiClient;
 use VitexSoftware\CSas\Statementor;
 
 require_once '../vendor/autoload.php';
@@ -25,15 +24,15 @@ require_once '../vendor/autoload.php';
 
 $options = getopt('o::e::', ['output::environment::']);
 \Ease\Shared::init(
-        ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
-        \array_key_exists('environment', $options) ? $options['environment'] : '../.env',
+    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
+    \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
-$destination = \array_key_exists('output', $options) ? $options['output'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout');
+$destination = \array_key_exists('output', $options) ? $options['output'] : (array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
 
 $engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_UUID'), Shared::cfg('CSAS_ACCOUNT_IBAN'), Shared::cfg('IMPORT_SCOPE', 'yesterday'));
 
 if (\Ease\Shared::cfg('APP_DEBUG', false)) {
-    $engine->logBanner( $engine->getAccountNumber().' '.$engine->getScopeSymbolic());
+    $engine->logBanner($engine->getAccountNumber().' '.$engine->getScopeSymbolic());
 }
 
 try {

@@ -29,9 +29,9 @@ $exitcode = 0;
 $options = getopt('o::e::', ['output::environment::']);
 Shr::init(
     ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_IBAN'],
-    \array_key_exists('environment', $options) ? $options['environment'] : '../.env',
+    \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
-$destination = \array_key_exists('output', $options) ? $options['output'] : Shr::cfg('RESULT_FILE', 'php://stdout');
+$destination = \array_key_exists('output', $options) ? $options['output'] : (array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
 
 // Keep your tokens fresh using https://github.com/Spoje-NET/csas-authorize.git
 
