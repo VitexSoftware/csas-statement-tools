@@ -27,7 +27,7 @@ $options = getopt('o::e::', ['output::environment::']);
     ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
-$destination = \array_key_exists('output', $options) ? $options['output'] : (array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
+$destination = \array_key_exists('output', $options) ? $options['output'] : (\array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
 
 $engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_UUID'), Shared::cfg('CSAS_ACCOUNT_IBAN'), Shared::cfg('IMPORT_SCOPE', 'yesterday'));
 
@@ -39,7 +39,7 @@ try {
     $status = 'ok';
     $exitcode = 0;
     $statements = $engine->getStatements(Shared::cfg('STATEMENT_FORMAT', 'xml'));
-} catch (\VitexSoftware\CSas\ApiException $exc) {
+} catch (ApiException $exc) {
     $status = $exc->getCode().': error';
     $exitcode = (int) $exc->getCode();
 }

@@ -249,3 +249,9 @@ echo "deb [signed-by=/etc/apt/trusted.gpg.d/vitexsoftware.gpg]  https://repo.vit
 sudo apt update
 sudo apt install csas-statement-tools
 ```
+
+See Also
+--------
+
+* [fiobank-statement-tools](https://github.com/Spoje-NET/fiobank-statement-tools)
+* [raiffeisenbank-statement-tools](https://github.com/Spoje-NET/raiffeisenbank-statement-tools)

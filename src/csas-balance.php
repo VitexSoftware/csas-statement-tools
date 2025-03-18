@@ -31,7 +31,7 @@ Shr::init(
     ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_IBAN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
-$destination = \array_key_exists('output', $options) ? $options['output'] : (array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
+$destination = \array_key_exists('output', $options) ? $options['output'] : (\array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
 
 // Keep your tokens fresh using https://github.com/Spoje-NET/csas-authorize.git
 
@@ -42,7 +42,7 @@ if (Shr::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
-$apiInstance = new \SpojeNET\CSas\Accounts\DefaultApi(new \SpojeNET\CSas\ApiClient(
+$apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClient(
     [
         'apikey' => Shr::cfg('CSAS_API_KEY'),
         'token' => Shr::cfg('CSAS_ACCESS_TOKEN'),
@@ -54,7 +54,7 @@ $apiInstance = new \SpojeNET\CSas\Accounts\DefaultApi(new \SpojeNET\CSas\ApiClie
 try {
     $balance = $apiInstance->getAccountBalance(Shr::cfg('CSAS_ACCOUNT_IBAN'));
     $written = file_put_contents($destination, json_encode($balance, Shr::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
-} catch (\VitexSoftware\CSas\ApiException $exc) {
+} catch (ApiException $exc) {
     $report['mesage'] = $exc->getMessage();
 
     $exitcode = $exc->getCode();

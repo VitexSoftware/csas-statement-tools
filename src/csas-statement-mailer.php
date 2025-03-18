@@ -28,12 +28,15 @@ if (\array_key_exists(1, $argv) && $argv[1] === '-h') {
     exit;
 }
 
-$options = getopt('o::e::', ['output::environment::']);
+$options = getopt('o::e::t::', ['output::environment::to::']);
 \Ease\Shared::init(
     ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_IBAN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
-$destination = \array_key_exists('output', $options) ? $options['output'] : (array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
+$destination = \array_key_exists('output', $options) ? $options['output'] : (\array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
+$format = \array_key_exists('format', $options) ? $options['format'] : (\array_key_exists('f', $options) ? $options['f'] : \Ease\Shared::cfg('STATEMENT_FORMAT', 'pdf'));
+$mailTo = \array_key_exists('to', $options) ? $options['to'] : (\array_key_exists('t', $options) ? $options['t'] : Shared::cfg('STATEMENTS_DIR', getcwd()));
+
 $engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_IBAN'));
 $engine->setScope(Shared::cfg('IMPORT_SCOPE', 'yesterday'));
 
@@ -51,7 +54,7 @@ try {
     $status = 'ok';
     $exitcode = 0;
     $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'MAIN'));
-} catch (\VitexSoftware\CSas\ApiException $exc) {
+} catch (ApiException $exc) {
     $status = $exc->getCode().': error';
     $exitcode = (int) $exc->getCode();
 }
@@ -60,7 +63,7 @@ if (empty($statements) === false) {
     $downloaded = $engine->download(
         Shared::cfg('STATEMENTS_DIR', sys_get_temp_dir()),
         $statements,
-        \array_key_exists(2, $argv) ? $argv[2] : Shared::cfg('STATEMENT_FORMAT', 'pdf'),
+        $format,
     );
 
     if ($downloaded) {
