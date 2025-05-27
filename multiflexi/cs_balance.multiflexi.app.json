@@ -37,7 +37,7 @@
             "required": true
         },
         "CSAS_SANDBOX_MODE": {
-            "type": "boolean",
+            "type": "bool",
             "description": "Enable sandbox mode for CSAS",
             "defval": false,
             "required": false
