@@ -9,7 +9,7 @@ static-code-analysis: vendor ## Runs a static code analysis with phpstan/phpstan
 
 .PHONY: static-code-analysis-baseline
 static-code-analysis-baseline: check-symfony vendor ## Generates a baseline for static code analysis with phpstan/phpstan
-	vendor/bin/phpstan analyze --configuration=phpstan-default.neon.dist --generate-baseline=phpstan-default-baseline.neon --memory-limit=-1
+	vendor/bin/phpstan analyse --configuration=phpstan-default.neon.dist --generate-baseline=phpstan-default-baseline.neon --memory-limit=-1
 
 .PHONY: tests
 tests: vendor
@@ -26,6 +26,26 @@ cs: ## Update Coding Standards
 # Use phpcs to reformat code to PSR12
 codingstandards:
 	phpcbf --colors --standard=PSR12 --extensions=php --ignore=vendor/ src/ 
+
+.PHONY: token
+token: ## Refresh token
+	csas-access-token -t`csas-access-token -l | head -n 1 | awk '{print $$2}'`  -o.env
+
+.PHONY: balance
+balance: token ## Balance launch
+	cd src ; php -f csas-balance.php
+
+.PHONY: statement-downloader
+statement-downloader: token ## Statement Downloader launch
+	cd src ; php -f csas-statement-downloader.php
+
+.PHONY: statement-mailer
+statement-mailer: token ## Statement Mailer launch
+	cd src ; php -f csas-statement-mailer.php
+
+.PHONY: report
+report: token ## Transaction Report launch
+	cd src ; php -f csas-transaction-report.php
 
 
 

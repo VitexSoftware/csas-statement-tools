@@ -51,9 +51,99 @@ $apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClie
     ],
 ));
 
+function getAccountIDs(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance): array
+{
+    $accounts = [];
+    $accountsRaw = $apiInstance->getAccounts()->getAccounts();
+
+    if (isset($accountsRaw) && \is_array($accountsRaw)) {
+        foreach ($accountsRaw as $account) {
+            $accounts[$account->getIdentification()->getIban()] = $account->getId();
+        }
+    }
+
+    return $accounts;
+}
+
+// Helper function to map IBAN to account ID
+function getAccountIdByIban(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance, string $iban): ?string
+{
+    $accountsRaw = $apiInstance->getAccounts()->getAccounts();
+
+    if (isset($accountsRaw) && \is_array($accountsRaw)) {
+        foreach ($accountsRaw as $account) {
+            if ($account->getIdentification()->getIban() === $iban) {
+                return $account->getId();
+            }
+        }
+    }
+
+    return null;
+}
+
+function getAccountByIban(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance, string $iban)
+{
+    $accountsRaw = $apiInstance->getAccounts()->getAccounts();
+
+    if (isset($accountsRaw) && \is_array($accountsRaw)) {
+        foreach ($accountsRaw as $account) {
+            if ($account->getIdentification()->getIban() === $iban) {
+                return $account;
+            }
+        }
+    }
+
+    return null;
+}
+
 try {
-    $balance = $apiInstance->getAccountBalance(Shr::cfg('CSAS_ACCOUNT_IBAN'));
-    $written = file_put_contents($destination, json_encode($balance, Shr::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+    // Map IBAN to account ID and get account object
+    $account = getAccountByIban($apiInstance, Shr::cfg('CSAS_ACCOUNT_IBAN'));
+
+    if (!$account) {
+        throw new \InvalidArgumentException('Account not found for IBAN: '.Shr::cfg('CSAS_ACCOUNT_IBAN'));
+    }
+
+    $accountId = $account->getId();
+    $balanceResponse = $apiInstance->getAccountBalance($accountId);
+
+    // Compose output structure
+    $result = [
+        'numberPart2' => $account->getIdentification()->getOther(),
+        'bankCode' => $account->getServicer()->getBankCode(),
+        'currencyFolders' => [],
+    ];
+
+    // Group balances by currency
+    $balancesByCurrency = [];
+    $balances = method_exists($balanceResponse, 'getBalances') ? $balanceResponse->getBalances() : [];
+
+    if (\is_array($balances)) {
+        foreach ($balances as $balance) {
+            $currency = $balance->getAmount()->getCurrency();
+            $balanceType = $balance->getType()->getCodeOrProprietary()->getCode();
+            $value = $balance->getAmount()->getValue();
+            $status = method_exists($account, 'getStatus') && $account->getStatus() ? $account->getStatus() : 'ACTIVE';
+
+            if (!isset($balancesByCurrency[$currency])) {
+                $balancesByCurrency[$currency] = [
+                    'currency' => $currency,
+                    'status' => $status,
+                    'balances' => [],
+                ];
+            }
+
+            $balancesByCurrency[$currency]['balances'][] = [
+                'balanceType' => $balanceType,
+                'currency' => $currency,
+                'value' => $value,
+            ];
+        }
+    }
+
+    $result['currencyFolders'] = array_values($balancesByCurrency);
+
+    $written = file_put_contents($destination, json_encode($result, Shr::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
 } catch (ApiException $exc) {
     $report['mesage'] = $exc->getMessage();
 
