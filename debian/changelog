@@ -1,5 +1,11 @@
-csas-statement-tools (0.1.0) UNRELEASED; urgency=medium
+csas-statement-tools (0.1.1) UNRELEASED; urgency=medium
+
+  * configuration update
+
+ -- vitex <info@vitexsoftware.cz>  Thu, 03 Jul 2025 10:32:06 +0200
+
+csas-statement-tools (0.1.0) unstable; urgency=medium
 
   * 0 phpstan issues
 
- -- vitex <info@vitexsoftware.cz>  Sun, 01 Dec 2024 06:21:53 +0100
+ -- vitex <info@vitexsoftware.cz>  Thu, 03 Jul 2025 10:31:50 +0200

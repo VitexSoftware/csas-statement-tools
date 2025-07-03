@@ -12,11 +12,55 @@
     "uuid": "d82ef26e-2bfc-4171-ad92-4eae643a5249",
     "topics": "Bank,Csas,Transactions,Check,Json,Report",
     "environment": {
+        "CSAS_API_KEY": {
+            "type": "text",
+            "description": "API key for CSAS",
+            "required": true
+        },
+        "CSAS_ACCESS_TOKEN": {
+            "type": "text",
+            "description": "Access token for CSAS",
+            "required": true
+        },
+        "CSAS_ACCOUNT_IBAN": {
+            "type": "text",
+            "description": "IBAN of the CSAS account",
+            "required": false
+        },
+        "CSAS_ACCOUNT_UUID": {
+            "type": "text",
+            "description": "UUID of the CSAS account",
+            "required": false
+        },
+        "CSAS_SANDBOX_MODE": {
+            "type": "bool",
+            "description": "Enable sandbox mode for CSAS",
+            "defval": false,
+            "required": false
+        },
+        "CSAS_API_DEBUG": {
+            "type": "bool",
+            "description": "Enable API debug mode",
+            "defval": false,
+            "required": false
+        },
+        "APP_DEBUG": {
+            "type": "bool",
+            "description": "Enable application debug mode",
+            "defval": false,
+            "required": false
+        },
         "ACCOUNT_NUMBER": {
             "type": "text",
             "description": "Bank Account Number",
             "defval": "",
-            "required": true
+            "required": false
+        },
+        "ACCOUNT_CURRENCY": {
+            "type": "text",
+            "description": "for multicurrency accounts please specify one",
+            "defval": "CZK",
+            "required": false
         },
         "REPORT_SCOPE": {
             "type": "text",
@@ -24,10 +68,20 @@
             "defval": "last_month",
             "required": false
         },
-        "ACCOUNT_CURRENCY": {
+        "STATEMENT_FORMAT": {
+            "type": "select",
+            "description": "pdf or xml",
+            "defval": "xml",
+            "options": {
+                "pdf": "PDF",
+                "xml": "XML"
+            },
+            "required": false
+        },
+        "STATEMENT_LINE": {
             "type": "text",
-            "description": "for multicurrency accounts please specify one",
-            "defval": "CZK",
+            "description": "Statement line type",
+            "defval": "MAIN",
             "required": false
         },
         "RESULT_FILE": {

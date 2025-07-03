@@ -12,29 +12,25 @@
     "topics": "Csas,Balance,Check,Json",
     "uuid": "e7df927a-a30e-40fe-ac3e-d4e547be8f95",
     "environment": {
-        "ACCOUNT_NUMBER": {
+        "CSAS_API_KEY": {
             "type": "text",
-            "description": "Bank Account Number",
-            "defval": "",
+            "description": "API key for CSAS",
             "required": true
         },
-        "EASE_LOGGER": {
-            "type": "string",
-            "description": "write log messages using",
-            "defval": "console|syslog",
-            "required": false
+        "CSAS_ACCESS_TOKEN": {
+            "type": "text",
+            "description": "Access token for CSAS",
+            "required": true
         },
         "CSAS_ACCOUNT_IBAN": {
             "type": "text",
             "description": "IBAN of the CSAS account",
-            "hint": "CZ1208000000000259459101",
             "required": true
         },
-        "CSAS_API_KEY": {
+        "CSAS_ACCOUNT_UUID": {
             "type": "text",
-            "description": "API key for CSAS",
-            "hint": "c5f91ec2-0237-4af2-9f90-c8366e209ff8",
-            "required": true
+            "description": "UUID of the CSAS account",
+            "required": false
         },
         "CSAS_SANDBOX_MODE": {
             "type": "bool",
@@ -42,17 +38,29 @@
             "defval": false,
             "required": false
         },
-        "CSAS_ACCESS_TOKEN": {
-            "type": "text",
-            "description": "Access token for CSAS",
-            "hint": "ewogICJ0eXBlIjogInRva2VuIiwKICAibmFtZSI6ICI4MDAwLTAxLTAxLTAwLjAwLjAwLjAwMDAwMSIsCiAgInNlc3Npb25VVUlEIjogIjZlNjRjZjU0LTNjZWQtNGRjYy04NTViLTgyZDc3OGM4NDA0NSIsCiAgInNjb3BlcyI6IFsKICAgICJzaWJsaW5ncy5hY2NvdW50cyIKICBdLAogICJjb25zZW50IjogWwogICAgewogICAgICAiaWQiOiAiMDAwMDAiLAogICAgICAiY29udGVudCI6ICJmdWxsIgogICAgfQogIF0sCiAgImxpbWl0cyI6IHsKICAgICJhY2Nlc3NTZWNvbmRzIjogMzAwLAogICAgInJlZnJlc2hTZWNvbmRzIjogMTU1NTIwMDAKICB9LAogICJhY2Nlc3NUeXBlIjogIm9mZmxpbmUiLAogICJleHBpcmF0aW9uIjogIjIwMjUtMDMtMTdUMTk6MDg6NDYuNjU2WiIKfQ==",
-            "required": true
+        "CSAS_API_DEBUG": {
+            "type": "bool",
+            "description": "Enable API debug mode",
+            "defval": false,
+            "required": false
         },
-        "CSAS_ACCOUNT_UUID": {
-            "type": "text",
-            "description": "UUID of the CSAS account",
-            "hint": "AA195E7DB499B4D9F48D46C208625FF53F2245F7",
-            "required": true
+        "APP_DEBUG": {
+            "type": "bool",
+            "description": "Enable application debug mode",
+            "defval": false,
+            "required": false
+        },
+        "RESULT_FILE": {
+            "type": "string",
+            "description": "write output json data to",
+            "defval": "csas_balance.json",
+            "required": false
+        },
+        "EASE_LOGGER": {
+            "type": "string",
+            "description": "write log messages using",
+            "defval": "console|syslog",
+            "required": false
         }
     },
     "multiflexi": "1.25"
