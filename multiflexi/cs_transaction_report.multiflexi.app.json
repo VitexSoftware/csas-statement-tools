@@ -78,12 +78,6 @@
             },
             "required": false
         },
-        "STATEMENT_LINE": {
-            "type": "text",
-            "description": "Statement line type",
-            "defval": "MAIN",
-            "required": false
-        },
         "RESULT_FILE": {
             "type": "string",
             "description": "write output json data to",

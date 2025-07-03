@@ -47,7 +47,7 @@ if (Shared::cfg('APP_DEBUG', false)) {
 try {
     $status = 'ok';
     $exitcode = 0;
-    $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'), Shared::cfg('STATEMENT_LINE', 'MAIN'));
+    $statements = $engine->getStatements(Shared::cfg('ACCOUNT_CURRENCY', 'CZK'));
 } catch (ApiException $exc) {
     $status = $exc->getCode().': error';
     $exitcode = (int) $exc->getCode();
