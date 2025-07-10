@@ -96,23 +96,26 @@ function getAccountByIban(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance, strin
     return null;
 }
 
+$report = ['currencyFolders' => []];
+
 try {
     // Map IBAN to account ID and get account object
     $account = getAccountByIban($apiInstance, Shr::cfg('CSAS_ACCOUNT_IBAN'));
 
     if (!$account) {
-        throw new \InvalidArgumentException('Account not found for IBAN: '.Shr::cfg('CSAS_ACCOUNT_IBAN'));
+        $report['message'] = sprintf(_('Account not found for IBAN: %s'), Shr::cfg('CSAS_ACCOUNT_IBAN'));
+        $exitcode = 5;
+        $engine->addStatusMessage($report['message'], 'error');
+
+        throw new \InvalidArgumentException($report['message']);
     }
 
     $accountId = $account->getId();
     $balanceResponse = $apiInstance->getAccountBalance($accountId);
 
     // Compose output structure
-    $result = [
-        'numberPart2' => $account->getIdentification()->getOther(),
-        'bankCode' => $account->getServicer()->getBankCode(),
-        'currencyFolders' => [],
-    ];
+    $report['numberPart2'] = $account->getIdentification()->getOther();
+    $report['bankCode'] = $account->getServicer()->getBankCode();
 
     // Group balances by currency
     $balancesByCurrency = [];
@@ -141,9 +144,7 @@ try {
         }
     }
 
-    $result['currencyFolders'] = array_values($balancesByCurrency);
-
-    $written = file_put_contents($destination, json_encode($result, Shr::cfg('DEBUG') ? \JSON_PRETTY_PRINT : 0));
+    $report['currencyFolders'] = array_values($balancesByCurrency);
 } catch (ApiException $exc) {
     $report['mesage'] = $exc->getMessage();
 
@@ -160,6 +161,8 @@ try {
     $exitcode = 4;
 }
 
+$report['exitcode'] = $exitcode;
+$written = file_put_contents($destination, json_encode($report, Shr::cfg('DEBUG') ? \JSON_PRETTY_PRINT | \JSON_UNESCAPED_UNICODE : 0));
 $engine->addStatusMessage(sprintf(_('Saving result to %s'), $destination), $written ? 'success' : 'error');
 
 exit($exitcode ?: ($written ? 0 : 2));

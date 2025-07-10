@@ -22,7 +22,7 @@ require_once '../vendor/autoload.php';
 \define('APP_NAME', 'CSas Statement Reporter');
 
 $options = getopt('o::e::', ['output::environment::']);
-\Ease\Shared::init(
+Shared::init(
     ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
@@ -30,7 +30,7 @@ $destination = \array_key_exists('output', $options) ? $options['output'] : (\ar
 
 $engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_UUID'), Shared::cfg('CSAS_ACCOUNT_IBAN'), Shared::cfg('IMPORT_SCOPE', 'yesterday'));
 
-if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+if (Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner($engine->getAccountNumber().' '.$engine->getScopeSymbolic());
 }
 
