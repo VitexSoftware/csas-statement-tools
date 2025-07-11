@@ -8,13 +8,13 @@ Homepage: https://github.com/VitexSoftware/csas-statement-tools
 
 Package: csas-statement-tools
 Architecture: all
-Depends: ${misc:Depends}, php-spojenet-csas-accountsapi (>=0.7)
+Depends: ${misc:Depends}, php-spojenet-csas-accountsapi (>=0.7.2)
 Suggests: multiflexi
-Description: Download your Raiffeisen Bank Statements
+Description: Download your Česká Spořitelna Bank Statements
  Download statements to disk in requested format and within given time
 
 Package: multiflexi-csas-statement-tools
 Architecture: all
 Depends: csas-statement-tools, multiflexi
-Description: Raiffeisen Bank statement tools to MultiFlexi
- Allow use of Raiffeisen Bank statement tools in MultiFlexi environment
+Description: Česká Spořitelna Bank statement tools to MultiFlexi
+ Allow use of Česká Spořitelna Bank statement tools in MultiFlexi environment

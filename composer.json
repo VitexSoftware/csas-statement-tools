@@ -14,7 +14,7 @@
         "src/csas-statement-mailer.php"
     ],
     "require": {
-        "spojenet/csas-accountsapi": "dev-main"
+        "spojenet/csas-accountsapi": "^0.7"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

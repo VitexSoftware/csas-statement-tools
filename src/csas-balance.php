@@ -51,56 +51,11 @@ $apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClie
     ],
 ));
 
-function getAccountIDs(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance): array
-{
-    $accounts = [];
-    $accountsRaw = $apiInstance->getAccounts()->getAccounts();
-
-    if (isset($accountsRaw) && \is_array($accountsRaw)) {
-        foreach ($accountsRaw as $account) {
-            $accounts[$account->getIdentification()->getIban()] = $account->getId();
-        }
-    }
-
-    return $accounts;
-}
-
-// Helper function to map IBAN to account ID
-function getAccountIdByIban(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance, string $iban): ?string
-{
-    $accountsRaw = $apiInstance->getAccounts()->getAccounts();
-
-    if (isset($accountsRaw) && \is_array($accountsRaw)) {
-        foreach ($accountsRaw as $account) {
-            if ($account->getIdentification()->getIban() === $iban) {
-                return $account->getId();
-            }
-        }
-    }
-
-    return null;
-}
-
-function getAccountByIban(\SpojeNet\CSas\Accounts\DefaultApi $apiInstance, string $iban)
-{
-    $accountsRaw = $apiInstance->getAccounts()->getAccounts();
-
-    if (isset($accountsRaw) && \is_array($accountsRaw)) {
-        foreach ($accountsRaw as $account) {
-            if ($account->getIdentification()->getIban() === $iban) {
-                return $account;
-            }
-        }
-    }
-
-    return null;
-}
-
 $report = ['currencyFolders' => []];
 
 try {
     // Map IBAN to account ID and get account object
-    $account = getAccountByIban($apiInstance, Shr::cfg('CSAS_ACCOUNT_IBAN'));
+    $account = Statementor::getAccountByIban($apiInstance, Shr::cfg('CSAS_ACCOUNT_IBAN'));
 
     if (!$account) {
         $report['message'] = sprintf(_('Account not found for IBAN: %s'), Shr::cfg('CSAS_ACCOUNT_IBAN'));

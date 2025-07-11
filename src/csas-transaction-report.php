@@ -23,7 +23,7 @@ require_once '../vendor/autoload.php';
 
 $options = getopt('o::e::', ['output::environment::']);
 Shared::init(
-    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
+    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
 $destination = \array_key_exists('output', $options) ? $options['output'] : (\array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
