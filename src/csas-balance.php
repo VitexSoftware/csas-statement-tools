@@ -28,7 +28,7 @@ $written = 0;
 $exitcode = 0;
 $options = getopt('o::e::', ['output::environment::']);
 Shr::init(
-    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_IBAN'],
+    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
 $destination = \array_key_exists('output', $options) ? $options['output'] : (\array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
@@ -54,23 +54,35 @@ $apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClie
 $report = ['currencyFolders' => []];
 
 try {
-    // Map IBAN to account ID and get account object
-    $account = Statementor::getAccountByIban($apiInstance, Shr::cfg('CSAS_ACCOUNT_IBAN'));
+    $accountId = Shr::cfg('CSAS_ACCOUNT_UUID');
 
-    if (!$account) {
-        $report['message'] = sprintf(_('Account not found for IBAN: %s'), Shr::cfg('CSAS_ACCOUNT_IBAN'));
-        $exitcode = 5;
-        $engine->addStatusMessage($report['message'], 'error');
+    if (empty($accountId)) {
+        $accountIban = Shr::cfg('CSAS_ACCOUNT_IBAN');
 
-        throw new \InvalidArgumentException($report['message']);
+        if ($accountIban) {
+            // Map IBAN to account ID and get account object
+            $account = Statementor::getAccountByIban($apiInstance, $accountIban);
+
+            if (!$account) {
+                $report['message'] = sprintf(_('Account not found for IBAN: %s'), Shr::cfg('CSAS_ACCOUNT_IBAN'));
+                $exitcode = 5;
+                $engine->addStatusMessage($report['message'], 'error');
+
+                throw new \InvalidArgumentException($report['message']);
+            }
+
+            $accountId = $account->getId();
+
+            // Compose output structure
+            $report['numberPart2'] = $account->getIdentification()->getOther();
+            $report['bankCode'] = $account->getServicer()->getBankCode();
+        } else {
+            $engine->addStatusMessage(_('No CSAS_ACCOUNT_UUID or CSAS_ACCOUNT_IBAN provided'), 'error');
+            $exitcode = 1;
+        }
     }
 
-    $accountId = $account->getId();
     $balanceResponse = $apiInstance->getAccountBalance($accountId);
-
-    // Compose output structure
-    $report['numberPart2'] = $account->getIdentification()->getOther();
-    $report['bankCode'] = $account->getServicer()->getBankCode();
 
     // Group balances by currency
     $balancesByCurrency = [];

@@ -15,7 +15,7 @@ declare(strict_types=1);
 
 namespace SpojeNet\CSas;
 
-use Ease\Shared;
+use Ease\Shared as Shr;
 
 require_once '../vendor/autoload.php';
 
@@ -31,14 +31,45 @@ if (\array_key_exists(1, $argv) && $argv[1] === '-h') {
 
 $options = getopt('o::e::d::f:', ['output::environment::destination::format']);
 \Ease\Shared::init(
-    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN', 'CSAS_ACCOUNT_UUID', 'CSAS_ACCOUNT_IBAN'],
+    ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
 $destination = \array_key_exists('output', $options) ? $options['output'] : (\array_key_exists('o', $options) ? $options['o'] : \Ease\Shared::cfg('RESULT_FILE', 'php://stdout'));
 $format = \array_key_exists('format', $options) ? $options['format'] : (\array_key_exists('f', $options) ? $options['f'] : \Ease\Shared::cfg('STATEMENT_FORMAT', 'pdf'));
-$saveTo = \array_key_exists('destination', $options) ? $options['destination'] : (\array_key_exists('d', $options) ? $options['d'] : Shared::cfg('STATEMENTS_DIR', getcwd()));
+$saveTo = \array_key_exists('destination', $options) ? $options['destination'] : (\array_key_exists('d', $options) ? $options['d'] : \Ease\Shared::cfg('STATEMENTS_DIR', getcwd()));
 
-$engine = new Statementor(Shared::cfg('CSAS_ACCOUNT_UUID'), Shared::cfg('CSAS_ACCOUNT_IBAN'), Shared::cfg('IMPORT_SCOPE', 'last_month'));
+$apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClient(
+    [
+        'apikey' => Shr::cfg('CSAS_API_KEY'),
+        'token' => Shr::cfg('CSAS_ACCESS_TOKEN'),
+        'debug' => Shr::cfg('CSAS_API_DEBUG', false),
+        'sandbox' => Shr::cfg('CSAS_SANDBOX_MODE'),
+    ],
+));
+
+$accountId = Shr::cfg('CSAS_ACCOUNT_UUID');
+$accountIban = Shr::cfg('CSAS_ACCOUNT_IBAN');
+
+if (empty($accountId)) {
+    if ($accountIban) {
+        // Map IBAN to account ID and get account object
+        $account = Statementor::getAccountByIban($apiInstance, $accountIban);
+
+        if (!$account) {
+            $report['message'] = sprintf(_('Account not found for IBAN: %s'), Shr::cfg('CSAS_ACCOUNT_IBAN'));
+            $exitcode = 5;
+
+            throw new \InvalidArgumentException($report['message']);
+        }
+
+        $accountId = $account->getId();
+    } else {
+        $report['message'] = _('No CSAS_ACCOUNT_UUID or CSAS_ACCOUNT_IBAN provided');
+        $exitcode = 1;
+    }
+}
+
+$engine = new Statementor($accountId, $accountIban, Shr::cfg('CSAS_STATEMENT_SCOPE', 'last_month'));
 
 if (\Ease\Shared::cfg('APP_DEBUG', false)) {
     $engine->logBanner($engine->getAccountNumber().' '.$engine->getScopeSymbolic());
