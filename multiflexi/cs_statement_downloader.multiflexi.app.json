@@ -18,11 +18,13 @@
     ],
     "artifacts": [
         {
+            "name": "Output JSON report",
             "type": "file",
             "path": "csas_statement_downloader.json",
             "description": "Output JSON data file"
         },
         {
+            "name": "Statements Directory",
             "type": "directory",
             "path": ".",
             "description": "Directory to save statements"

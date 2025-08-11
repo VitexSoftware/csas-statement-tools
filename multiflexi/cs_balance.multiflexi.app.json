@@ -19,7 +19,7 @@
     ],
     "artifacts": [
         {
-            "name": "Result JSON",
+            "name": "Result JSON report",
             "path": "csas_balance.json",
             "type": "file",
             "description": "Output file containing the balance data in JSON format"

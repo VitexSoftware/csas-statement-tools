@@ -20,13 +20,14 @@
         "Json",
         "Report"
     ],
-    "artifacts": {
-        "statements": {
+    "artifacts": [
+        {
+            "name": "Transaction report",
             "type": "file",
             "description": "Generated bank statements",
             "path": "^transaction_report_[A-Za-z0-9]+\\.json$"
         }
-    },
+    ],
     "environment": {
         "CSAS_API_KEY": {
             "type": "text",

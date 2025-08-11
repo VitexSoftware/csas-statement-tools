@@ -17,13 +17,14 @@
         "Mail",
         "Statements"
     ],
-    "artifacts": {
-        "statements": {
+    "artifacts": [
+        {
+            "name": "Statements report",
             "type": "file",
             "description": "Generated bank statements",
             "path": "csas_statement_mailer.json"
         }
-    },
+    ],
     "environment": {
         "CSAS_API_KEY": {
             "type": "text",
