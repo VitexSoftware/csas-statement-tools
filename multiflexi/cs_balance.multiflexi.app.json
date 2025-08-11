@@ -7,9 +7,24 @@
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
     "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "requirements": "Csas",
+    "requirements": [
+        "Csas"
+    ],
     "ociimage": "",
-    "topics": "Csas,Balance,Check,Json",
+    "topics": [
+        "Csas",
+        "Balance",
+        "Check",
+        "Json"
+    ],
+    "artifacts": [
+        {
+            "name": "Result JSON",
+            "path": "csas_balance.json",
+            "type": "file",
+            "description": "Output file containing the balance data in JSON format"
+        }
+    ],
     "uuid": "e7df927a-a30e-40fe-ac3e-d4e547be8f95",
     "environment": {
         "CSAS_API_KEY": {
@@ -63,5 +78,5 @@
             "required": false
         }
     },
-    "multiflexi": "1.25"
+    "multiflexi": "2.0.0"
 }

@@ -7,10 +7,23 @@
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
     "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "requirements": "Csas",
+    "requirements": [
+        "Csas"
+    ],
     "ociimage": "",
     "uuid": "bd700603-7a49-431c-8e30-97dbf1bddb41",
-    "topics": "Csas,Mail,Statements",
+    "topics": [
+        "Csas",
+        "Mail",
+        "Statements"
+    ],
+    "artifacts": {
+        "statements": {
+            "type": "file",
+            "description": "Generated bank statements",
+            "path": "csas_statement_mailer.json"
+        }
+    },
     "environment": {
         "CSAS_API_KEY": {
             "type": "text",
@@ -123,5 +136,5 @@
             "required": false
         }
     },
-    "multiflexi": "1.10.2.0"
+    "multiflexi": "2.0.0"
 }

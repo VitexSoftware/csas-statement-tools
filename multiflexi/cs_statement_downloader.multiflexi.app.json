@@ -7,9 +7,27 @@
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
     "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "requirements": "Csas",
+    "requirements": [
+        "Csas"
+    ],
     "ociimage": "",
-    "topics": "Csas,Statements,Downloader",
+    "topics": [
+        "Csas",
+        "Statements",
+        "Downloader"
+    ],
+    "artifacts": [
+        {
+            "type": "file",
+            "path": "csas_statement_downloader.json",
+            "description": "Output JSON data file"
+        },
+        {
+            "type": "directory",
+            "path": ".",
+            "description": "Directory to save statements"
+        }
+    ],
     "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
     "environment": {
         "CSAS_API_KEY": {
@@ -99,5 +117,5 @@
             "required": false
         }
     },
-    "multiflexi": "1.30"
+    "multiflexi": "2.0.0"
 }

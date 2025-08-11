@@ -7,10 +7,26 @@
     "cmdparams": "",
     "deploy": "apt install csas-statement-tools",
     "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "requirements": "Csas",
+    "requirements": [
+        "Csas"
+    ],
     "ociimage": "",
     "uuid": "d82ef26e-2bfc-4171-ad92-4eae643a5249",
-    "topics": "Bank,Csas,Transactions,Check,Json,Report",
+    "topics": [
+        "Bank",
+        "Csas",
+        "Transactions",
+        "Check",
+        "Json",
+        "Report"
+    ],
+    "artifacts": {
+        "statements": {
+            "type": "file",
+            "description": "Generated bank statements",
+            "path": "^transaction_report_[A-Za-z0-9]+\\.json$"
+        }
+    },
     "environment": {
         "CSAS_API_KEY": {
             "type": "text",
@@ -97,5 +113,5 @@
             "required": false
         }
     },
-    "multiflexi": "1.10.2.0"
+    "multiflexi": "2.0.0"
 }
