@@ -80,6 +80,8 @@ try {
             $engine->addStatusMessage(_('No CSAS_ACCOUNT_UUID or CSAS_ACCOUNT_IBAN provided'), 'error');
             $exitcode = 1;
         }
+    } else {
+        $account = Statementor::getAccountById($apiInstance, $accountId);
     }
 
     $balanceResponse = $apiInstance->getAccountBalance($accountId);
