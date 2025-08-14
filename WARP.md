@@ -85,6 +85,15 @@ Validate configurations using:
 multiflexi-cli application validate-json --json multiflexi/[filename].app.json
 ```
 
+**Recent Schema Updates (September 2025):**
+- Fixed `artifacts` structure: Changed from object format to array format as required by MultiFlexi 2.0.0
+- Updated environment variable types: Changed `STATEMENT_FORMAT` from deprecated `"select"` to compliant `"set"`
+- All application definitions now pass strict schema validation
+- Common schema violations to avoid:
+  - Using `"type": "select"` instead of `"type": "set"` for dropdown fields
+  - Using object format for artifacts instead of array format
+  - Including disallowed properties like `"id"` in artifact definitions
+
 ## Empty Statement Generation
 
 When no bank statements are available for a requested period, the tools can optionally generate mock "empty" statements:

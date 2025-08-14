@@ -255,6 +255,20 @@ See the full list of ready-to-run applications within the MultiFlexi platform on
 
 [![MultiFlexi App](https://github.com/VitexSoftware/MultiFlexi/blob/main/doc/multiflexi-app.svg)](https://www.multiflexi.eu/apps.php)
 
+### MultiFlexi JSON Schema Compliance
+
+All MultiFlexi application definitions have been updated to comply with the latest schema requirements:
+
+- **Artifacts Structure**: Changed from object format to array format as required by MultiFlexi 2.0.0 schema
+- **Environment Variable Types**: Updated `STATEMENT_FORMAT` type from deprecated `"select"` to compliant `"set"` type
+- **Schema Validation**: All JSON files now pass strict schema validation using `multiflexi-cli application validate-json`
+
+The following applications are available:
+- `cs_balance.multiflexi.app.json` - Balance checking application
+- `cs_statement_downloader.multiflexi.app.json` - Statement download application  
+- `cs_statement_mailer.multiflexi.app.json` - Statement email delivery application
+- `cs_transaction_report.multiflexi.app.json` - Transaction reporting application
+
 Installation
 ------------
 

@@ -83,7 +83,7 @@
             "required": false
         },
         "STATEMENT_FORMAT": {
-            "type": "select",
+            "type": "set",
             "description": "pdf or xml",
             "defval": "pdf",
             "options": {
