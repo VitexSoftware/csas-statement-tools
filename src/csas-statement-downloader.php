@@ -30,7 +30,7 @@ if (\array_key_exists(1, $argv) && $argv[1] === '-h') {
 }
 
 $options = getopt('o::e::d::f:', ['output::environment::destination::format']);
-\Ease\Shared::init(
+Shr::init(
     ['CSAS_API_KEY', 'CSAS_ACCESS_TOKEN'],
     \array_key_exists('environment', $options) ? $options['environment'] : (\array_key_exists('e', $options) ? $options['e'] : '../.env'),
 );
@@ -71,7 +71,7 @@ if (empty($accountId)) {
 
 $engine = new Statementor($accountId, $accountIban, Shr::cfg('CSAS_STATEMENT_SCOPE', 'last_month'));
 
-if (\Ease\Shared::cfg('APP_DEBUG', false)) {
+if (Shr::cfg('APP_DEBUG', false)) {
     $engine->logBanner($engine->getAccountNumber().' '.$engine->getScopeSymbolic());
 }
 

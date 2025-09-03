@@ -185,7 +185,7 @@ CERT_PASS=CertPass
 XIBMCLIENTID=PwX4XXXXXXXXXXv6I
 ACCOUNT_NUMBER=666666666
 ACCOUNT_CURRENCY=CZK
-STATEMENT_FORMAT=pdf | xml | MT940
+STATEMENT_FORMAT=pdf | abo-standard
 STATEMENT_LINE=MAIN
 STATEMENT_IMPORT_SCOPE=last_two_months
 STATEMENTS_DIR=~/Documents/
@@ -199,6 +199,8 @@ STATEMENTS_FROM=email@address.com
 STATEMENTS_REPLYTO=email@address.com
 STATEMENTS_CC=email@address.com
 ```
+
+ >> Format Note: only `pdf` and `abo-standard` work for us. Please [ask the support for explanation](https://developers.erstegroup.com/support)
 
 Availble Import Scope Values
 
@@ -223,6 +225,8 @@ Availble Import Scope Values
 * 'October'
 * 'November',
 * 'December'
+
+Se The List of [statement formats provided](https://jsapi.apiary.io/apis/eahaccountsapiv3prod/reference/statements/list-of-statements/get-statements-list.html)
 
 Created using the library [php-csas-accountsapi](https://github.com/Spoje-NET/php-csas-accountsapi)
 
