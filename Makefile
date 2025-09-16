@@ -29,7 +29,7 @@ codingstandards:
 
 .PHONY: token
 token: ## Refresh token
-	EASE_LOGGER=console csas-access-token -t`csas-access-token -l | head -n 1 | awk '{print $$2}'`  -o.env
+	EASE_LOGGER=console csas-access-token -t`csas-access-token -l | tail -n 1 | awk '{print $$2}'`  -o.env
 
 .PHONY: balance
 balance: token ## Balance launch
