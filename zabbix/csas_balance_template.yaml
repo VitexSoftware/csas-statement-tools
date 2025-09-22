@@ -1,0 +1,43 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: 6a57662a2cbe471592fd43cd380bea20
+      name: Templates/Bank/CSas
+
+  templates:
+    - uuid: ea4a7a56ea784b0da1af8ceda5d4a54e
+      template: Template CSAS Bank Account Balance
+      name: Template CSAS Bank Account Balance
+      description: >
+        Import JSON balance report via trapper, parse CLBD value,
+        generate alerts on low balance.
+      groups:
+        - name: Templates/Bank/CSas
+      items:
+        - uuid: b943bbfed39d46a0a54e01447c1b2729
+          name: Bank report raw JSON
+          type: TRAP
+          key: bank.balance.raw
+          value_type: TEXT
+          trends: '0'
+          history: 1d
+          description: Raw JSON report received from external script.
+        - uuid: 1e16ff5291c04e9c9a7629f7747c1ab2
+          name: Bank balance CZK (CLBD)
+          type: DEPENDENT
+          key: bank.balance.cz.CLB
+          master_item:
+            key: bank.balance.raw
+          value_type: FLOAT
+          units: Kč
+          description: Current bank balance in CZK (from CLBD).
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.currencyFolders[0].balances[?(@.balanceType=="CLBD")].value.first()'
+
+  triggers:
+    - uuid: e002631669554e3ea563cecc91d196a7
+      expression: 'last(/Template CSAS Bank Account Balance/bank.balance.cz.CLB)<500'
+      name: 'Bank balance low (<500 Kč)'
+      priority: HIGH

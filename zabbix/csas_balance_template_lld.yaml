@@ -1,0 +1,53 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: 6a57662a2cbe471592fd43cd380bea20
+      name: Templates/Bank/CSas
+
+  templates:
+    - uuid: ea4a7a56ea784b0da1af8ceda5d4a54e
+      template: Template CSAS Bank Account Balance LLD
+      name: Template CSAS Bank Account Balance LLD
+      description: >
+        Auto-discover multiple CSAS bank accounts and monitor their balances.
+        Uses Low Level Discovery to create items and triggers for each account.
+      groups:
+        - name: Templates/Bank/CSas
+      discovery_rules:
+        - uuid: f1234567-1234-1234-1234-123456789abc
+          name: CSAS Bank Accounts Discovery
+          key: csas.accounts.discovery
+          type: TRAP
+          delay: 1h
+          description: >
+            Discovers CSAS bank accounts from JSON data.
+            Expected JSON format: {"data": [{"ACCOUNT_ID": "123456789", "ACCOUNT_NAME": "Main Account"}, ...]}
+          item_prototypes:
+            - uuid: f1234567-1234-1234-1234-123456789001
+              name: 'Bank report raw JSON [{#ACCOUNT_ID}]'
+              type: TRAP
+              key: 'bank.balance.raw[{#ACCOUNT_ID}]'
+              value_type: TEXT
+              trends: '0'
+              history: 1d
+              description: 'Raw JSON report for account {#ACCOUNT_ID} - {#ACCOUNT_NAME}'
+            - uuid: f1234567-1234-1234-1234-123456789002
+              name: 'Bank balance CZK (CLBD) [{#ACCOUNT_ID}]'
+              type: DEPENDENT
+              key: 'bank.balance.cz.CLB[{#ACCOUNT_ID}]'
+              master_item:
+                key: 'bank.balance.raw[{#ACCOUNT_ID}]'
+              value_type: FLOAT
+              units: Kč
+              description: 'Current bank balance in CZK (from CLBD) for account {#ACCOUNT_ID} - {#ACCOUNT_NAME}'
+              preprocessing:
+                - type: JSONPATH
+                  parameters:
+                    - '$.currencyFolders[0].balances[?(@.balanceType=="CLBD")].value.first()'
+          trigger_prototypes:
+            - uuid: f1234567-1234-1234-1234-123456789003
+              expression: 'last(/Template CSAS Bank Account Balance LLD/bank.balance.cz.CLB[{#ACCOUNT_ID}])<500'
+              name: 'Bank balance low (<500 Kč) for account {#ACCOUNT_ID}'
+              priority: HIGH
+              description: 'Bank balance for account {#ACCOUNT_ID} ({#ACCOUNT_NAME}) is below 500 Kč'
+              manual_close: 'YES'
