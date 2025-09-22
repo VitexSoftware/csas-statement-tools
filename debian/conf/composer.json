@@ -1,6 +1,6 @@
 {
   "name": "spojenet/csas-statement-tools",
-  "description": "csas  account statement tools",
+  "description": "ČSas (Česká spořitelna) account statement tools",
   "license": "MIT",
   "authors": [
     {
@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AbraFlexi\\Csas\\": "/usr/share/csas-statement-downloader/Csas/"
+      "SpojeNet\\CSas\\Csas\\": "/usr/lib/csas-statement-tools/Csas/"
     }
   },
   "repositories": [
