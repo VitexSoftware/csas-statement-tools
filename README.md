@@ -1,7 +1,7 @@
 ČSas Statement Tools
 ====================
 
-A set of tools for downloading and subsequent operations with ČSas (Československá obchodní banka) bank statements
+A set of tools for downloading and subsequent operations with ČSas (Česká spořitelna) bank statements
 
 [![View csas-statement-tools on GitHub](https://img.shields.io/github/stars/VitexSoftware/csas-statement-tools?color=232323&label=csas-statement-tools&logo=github&labelColor=232323)](https://github.com/Vitexsoftware/csas-statement-tools) 
 [![Author Spoje-NET](https://img.shields.io/badge/VitexSoftware-b820f9?labelColor=b820f9&logo=githubsponsors&logoColor=fff)](https://github.com/VitexSoftware) ![Written in PHP](https://img.shields.io/static/v1?label=&message=PHP&color=777BB4&logo=php&logoColor=FFFFFF)
