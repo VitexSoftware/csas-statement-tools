@@ -4,7 +4,7 @@ This file provides guidance to WARP (warp.dev) when working with code in this re
 
 ## Overview
 
-CSas Statement Tools is a PHP-based collection of command-line tools for interacting with ČSOB (CSAS) bank API to download statements, check balances, and generate transaction reports. The project uses the `spojenet/csas-accountsapi` library for bank API integration and follows PHP-FIG standards.
+CSas Statement Tools is a PHP-based collection of command-line tools for interacting with ČSas (Česká spořitelna) bank API to download statements, check balances, and generate transaction reports. The project uses the `spojenet/csas-accountsapi` library for bank API integration and follows PHP-FIG standards.
 
 ## Core Architecture
 
@@ -13,6 +13,7 @@ CSas Statement Tools is a PHP-based collection of command-line tools for interac
 - **Statement Mailer** (`csas-statement-mailer.php`) - Downloads and emails statements to recipients
 - **Balance Checker** (`csas-balance.php`) - Retrieves current account balances in JSON format
 - **Transaction Reporter** (`csas-transaction-report.php`) - Generates detailed transaction reports for specified periods
+- **Empty Statement Generator** (`src/Csas/EmptyStatementGenerator.php`) - Generates mock statements for periods with no transactions
 
 ### Entry Points
 All tools are accessible via:
@@ -89,14 +90,17 @@ multiflexi-cli application validate-json --json multiflexi/[filename].app.json
 When no bank statements are available for a requested period, the tools can optionally generate mock "empty" statements:
 
 - **Enable**: Set `CSAS_GENERATE_EMPTY_STATEMENTS=true` in environment
+- **Implementation**: `SpojeNet\CSas\Csas\EmptyStatementGenerator` class in `src/Csas/`
 - **Formats**: Supports all standard formats (PDF, ABO-standard, XML, etc.)
 - **Content**: Contains account information and period dates with clear indication of no transactions
-- **Filename**: Prefixed with `0_` and includes `EMPTY_` identifier
+- **Filename**: Prefixed with `0_` and includes `EMPTY_` identifier (e.g., `0_CZ123456_EMPTY_abc123_CZK_2024-01-01.pdf`)
 - **Use cases**: Automated reporting systems that require statement files even for periods with no activity
+- **Email Support**: Statement mailer automatically handles empty statement generation and delivery
+- **Autoloading**: Uses PSR-4 autoloading with proper namespace structure
 
 ## Authentication & Security
 
-The tools use ČSOB's OAuth2-based API authentication:
+The tools use ČSas's OAuth2-based API authentication:
 - Requires `CSAS_API_KEY` and `CSAS_ACCESS_TOKEN`
 - Access tokens expire and must be refreshed (use `make token`)
 - Supports sandbox mode for development (`CSAS_SANDBOX_MODE=true`)
