@@ -88,6 +88,46 @@ if (empty($statements) === false) {
     $engine->download($saveTo, $statements, $format);
 } else {
     echo "no statements returned\n";
+
+    // Generate empty/mock statement if enabled
+    if (Shr::cfg('CSAS_GENERATE_EMPTY_STATEMENTS', false)) {
+        $engine->addStatusMessage('Generating empty statement for period with no transactions', 'info');
+
+        $generator = new \SpojeNet\CSas\Csas\EmptyStatementGenerator(
+            $engine->getAccountNumber(),
+            $accountIban,
+            Shr::cfg('ACCOUNT_CURRENCY', 'CZK'),
+            $engine->getSince(),
+            $engine->getUntil(),
+        );
+
+        $mockStatements = $generator->generateEmptyStatements($format);
+
+        if (!empty($mockStatements)) {
+            $saved = [];
+
+            foreach ($mockStatements as $statement) {
+                $statementFilename = sprintf(
+                    '0_%s_EMPTY_%s_%s_%s.%s',
+                    $engine->getAccountNumber(),
+                    $statement->accountStatementId,
+                    Shr::cfg('ACCOUNT_CURRENCY', 'CZK'),
+                    $statement->dateFrom->format('Y-m-d'),
+                    $format,
+                );
+
+                $content = $generator->generateEmptyStatementContent($format, $statement);
+                $filePath = $saveTo.'/'.$statementFilename;
+
+                if (file_put_contents($filePath, $content)) {
+                    $saved[$statementFilename] = $filePath;
+                    $engine->addStatusMessage($statementFilename.' (empty statement) saved', 'success');
+                }
+            }
+
+            $engine->addStatusMessage('Generated '.\count($saved).' empty statement(s)', 'info');
+        }
+    }
 }
 
 exit($exitcode);

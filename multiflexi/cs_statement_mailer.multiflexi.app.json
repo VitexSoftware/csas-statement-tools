@@ -135,6 +135,12 @@
             "description": "CC email address",
             "defval": "",
             "required": false
+        },
+        "CSAS_GENERATE_EMPTY_STATEMENTS": {
+            "type": "bool",
+            "description": "Generate and mail mock statements when no transactions are available for the period",
+            "defval": false,
+            "required": false
         }
     },
     "multiflexi": "2.0.0"

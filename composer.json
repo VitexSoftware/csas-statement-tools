@@ -16,6 +16,11 @@
     "require": {
         "spojenet/csas-accountsapi": "dev-main"
     },
+    "autoload": {
+        "psr-4": {
+            "SpojeNet\\CSas\\Csas\\": "src/Csas/"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "*",
         "phpstan/phpstan": "*",

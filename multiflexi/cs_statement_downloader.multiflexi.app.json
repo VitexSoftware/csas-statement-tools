@@ -117,6 +117,12 @@
             "description": "write log messages using",
             "defval": "console|syslog",
             "required": false
+        },
+        "CSAS_GENERATE_EMPTY_STATEMENTS": {
+            "type": "bool",
+            "description": "Generate mock statements when no transactions are available for the period",
+            "defval": false,
+            "required": false
         }
     },
     "multiflexi": "2.0.0"

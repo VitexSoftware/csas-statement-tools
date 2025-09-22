@@ -1,7 +1,7 @@
 ČSas Statement Tools
 ====================
 
-A set of tools for downloading and subsequent operations with Raiffaissenbank bank statements
+A set of tools for downloading and subsequent operations with ČSas (Československá obchodní banka) bank statements
 
 [![View csas-statement-tools on GitHub](https://img.shields.io/github/stars/VitexSoftware/csas-statement-tools?color=232323&label=csas-statement-tools&logo=github&labelColor=232323)](https://github.com/Vitexsoftware/csas-statement-tools) 
 [![Author Spoje-NET](https://img.shields.io/badge/VitexSoftware-b820f9?labelColor=b820f9&logo=githubsponsors&logoColor=fff)](https://github.com/VitexSoftware) ![Written in PHP](https://img.shields.io/static/v1?label=&message=PHP&color=777BB4&logo=php&logoColor=FFFFFF)
@@ -174,26 +174,43 @@ Exit Codes
 4xx: Permission Denied
 5xx: Server error
 
+Empty Statement Generation
+--------------------------
+
+When no bank statement is available for a requested period, you can optionally generate a mock statement:
+
+* **Enable**: Set `CSAS_GENERATE_EMPTY_STATEMENTS=true` in your environment
+* **Supported Formats**: PDF, ABO-standard, XML, and other available formats
+* **File Naming**: Files are prefixed with `0_` and include `EMPTY_` identifier (e.g., `0_CZ123456_EMPTY_abc123_CZK_2024-01-01.pdf`)
+* **Content**: Contains account information, period dates, and clear indication that no transactions occurred
+* **Use Cases**: Automated reporting systems that require statement files even for periods with no banking activity
+* **Email Support**: Statement mailer also supports sending empty statements when enabled
+
 Configuration
 -------------
 
 Please set this environment variables or specify path to .env file
 
 ```env
-CERT_FILE='RAIFF_CERT.p12'
-CERT_PASS=CertPass
-XIBMCLIENTID=PwX4XXXXXXXXXXv6I
-ACCOUNT_NUMBER=666666666
+# ČSas API Configuration
+CSAS_API_KEY=your_api_key_here
+CSAS_ACCESS_TOKEN=your_access_token_here
+CSAS_ACCOUNT_IBAN=CZ4108000000000782553098
+CSAS_ACCOUNT_UUID=optional_account_uuid
+
+# Optional settings
+CSAS_SANDBOX_MODE=false
+CSAS_API_DEBUG=false
 ACCOUNT_CURRENCY=CZK
-STATEMENT_FORMAT=pdf | abo-standard
-STATEMENT_LINE=MAIN
-STATEMENT_IMPORT_SCOPE=last_two_months
+STATEMENT_FORMAT=pdf
 STATEMENTS_DIR=~/Documents/
-API_DEBUG=True
-APP_DEBUG=True
+APP_DEBUG=false
 EASE_LOGGER=syslog|eventlog|console
 
-#Mailer specific:
+# Empty statement generation
+CSAS_GENERATE_EMPTY_STATEMENTS=false
+
+# Mailer specific
 STATEMENTS_TO=statement@recipient.com
 STATEMENTS_FROM=email@address.com
 STATEMENTS_REPLYTO=email@address.com
