@@ -1,90 +1,117 @@
 {
-    "image": "",
-    "name": "ČSas statement downloader",
-    "description": "Download Csas statements in given format",
-    "executable": "csas-statement-downloader",
-    "setup": "",
-    "cmdparams": "",
-    "deploy": "apt install csas-statement-tools",
-    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "requirements": [
-        "Csas"
-    ],
-    "ociimage": "",
-    "topics": [
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.0.0",
+    "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
+    "name": {
+        "en": "ČSas statement downloader",
+        "cs": "ČSas statement downloader"
+    },
+    "description": {
+        "en": "Download Csas statements in given format",
+        "cs": "Download Csas statements in given format"
+    },
+    "tags": [
         "Csas",
         "Statements",
         "Downloader"
     ],
-    "artifacts": [
-        {
-            "name": "Output JSON report",
-            "type": "file",
-            "path": "csas_statement_downloader.json",
-            "description": "Output JSON data file"
-        },
-        {
-            "name": "Statements Directory",
-            "type": "directory",
-            "path": ".",
-            "description": "Directory to save statements"
-        }
-    ],
-    "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
+    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
+    "image": "",
+    "ociimage": "",
+    "executable": "csas-statement-downloader",
     "environment": {
         "CSAS_API_KEY": {
             "type": "text",
-            "description": "API key for CSAS",
-            "required": true
+            "description": {
+                "en": "API key for CSAS",
+                "cs": "API key for CSAS"
+            },
+            "required": true,
+            "category": "Other"
         },
         "CSAS_ACCESS_TOKEN": {
             "type": "text",
-            "description": "Access token for CSAS",
-            "required": true
+            "description": {
+                "en": "Access token for CSAS",
+                "cs": "Access token for CSAS"
+            },
+            "required": true,
+            "category": "Security"
         },
         "CSAS_ACCOUNT_IBAN": {
             "type": "text",
-            "description": "IBAN of the CSAS account",
-            "required": true
+            "description": {
+                "en": "IBAN of the CSAS account",
+                "cs": "IBAN of the CSAS account"
+            },
+            "required": true,
+            "category": "Other"
         },
         "CSAS_ACCOUNT_UUID": {
             "type": "text",
-            "description": "UUID of the CSAS account",
-            "required": true
+            "description": {
+                "en": "UUID of the CSAS account",
+                "cs": "UUID of the CSAS account"
+            },
+            "required": true,
+            "category": "Other"
         },
         "CSAS_SANDBOX_MODE": {
             "type": "bool",
-            "description": "Enable sandbox mode for CSAS",
+            "description": {
+                "en": "Enable sandbox mode for CSAS",
+                "cs": "Enable sandbox mode for CSAS"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "CSAS_API_DEBUG": {
             "type": "bool",
-            "description": "Enable API debug mode",
+            "description": {
+                "en": "Enable API debug mode",
+                "cs": "Enable API debug mode"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Behavior"
         },
         "APP_DEBUG": {
             "type": "bool",
-            "description": "Enable application debug mode",
+            "description": {
+                "en": "Enable application debug mode",
+                "cs": "Enable application debug mode"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Behavior"
         },
         "IMPORT_SCOPE": {
             "type": "text",
-            "description": "Time scope of transactions downloaded",
+            "description": {
+                "en": "Time scope of transactions downloaded",
+                "cs": "Time scope of transactions downloaded"
+            },
             "defval": "auto",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "STATEMENTS_DIR": {
             "type": "text",
-            "description": "Directory to save statements",
+            "description": {
+                "en": "Directory to save statements",
+                "cs": "Directory to save statements"
+            },
             "defval": ".",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "STATEMENT_FORMAT": {
             "type": "set",
-            "description": "pdf or xml",
+            "description": {
+                "en": "pdf or xml",
+                "cs": "pdf or xml"
+            },
             "defval": "pdf",
             "options": {
                 "pdf": "PDF",
@@ -98,32 +125,68 @@
                 "csv-semicolon": "CSV Semicolon",
                 "mt940": "MT940"
             },
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "ACCOUNT_CURRENCY": {
             "type": "text",
-            "description": "for multicurrency accounts please specify one",
+            "description": {
+                "en": "for multicurrency accounts please specify one",
+                "cs": "for multicurrency accounts please specify one"
+            },
             "defval": "CZK",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "RESULT_FILE": {
             "type": "string",
-            "description": "write output json data to",
+            "description": {
+                "en": "write output json data to",
+                "cs": "write output json data to"
+            },
             "defval": "csas_statement_downloader.json",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "EASE_LOGGER": {
             "type": "string",
-            "description": "write log messages using",
+            "description": {
+                "en": "write log messages using",
+                "cs": "write log messages using"
+            },
             "defval": "console|syslog",
-            "required": false
+            "required": false,
+            "category": "Behavior"
         },
         "CSAS_GENERATE_EMPTY_STATEMENTS": {
             "type": "bool",
-            "description": "Generate mock statements when no transactions are available for the period",
+            "description": {
+                "en": "Generate mock statements when no transactions are available for the period",
+                "cs": "Generate mock statements when no transactions are available for the period"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Other"
         }
     },
-    "multiflexi": "2.0.0"
+    "artifacts": [
+        {
+            "name": "Output JSON report",
+            "type": "file",
+            "path": "csas_statement_downloader.json",
+            "description": {
+                "en": "Output JSON data file",
+                "cs": "Output JSON data file"
+            }
+        },
+        {
+            "name": "Statements Directory",
+            "type": "directory",
+            "path": ".",
+            "description": {
+                "en": "Directory to save statements",
+                "cs": "Directory to save statements"
+            }
+        }
+    ]
 }

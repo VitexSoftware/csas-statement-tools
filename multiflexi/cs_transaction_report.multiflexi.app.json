@@ -1,18 +1,16 @@
 {
-    "image": "",
-    "name": "ČSas transaction report",
-    "description": "CSas transaction report",
-    "executable": "csas-transaction-report",
-    "setup": "",
-    "cmdparams": "",
-    "deploy": "apt install csas-statement-tools",
-    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "requirements": [
-        "Csas"
-    ],
-    "ociimage": "",
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.0.0",
     "uuid": "d82ef26e-2bfc-4171-ad92-4eae643a5249",
-    "topics": [
+    "name": {
+        "en": "ČSas transaction report",
+        "cs": "ČSas transaction report"
+    },
+    "description": {
+        "en": "CSas transaction report",
+        "cs": "CSas transakce report"
+    },
+    "tags": [
         "Bank",
         "Csas",
         "Transactions",
@@ -20,99 +18,161 @@
         "Json",
         "Report"
     ],
-    "artifacts": [
-        {
-            "name": "Transaction report",
-            "type": "file",
-            "description": "Generated bank statements",
-            "path": "^transaction_report_[A-Za-z0-9]+\\.json$"
-        }
-    ],
+    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
+    "image": "",
+    "ociimage": "",
+    "executable": "csas-transaction-report",
     "environment": {
         "CSAS_API_KEY": {
             "type": "text",
-            "description": "API key for CSAS",
-            "required": true
+            "description": {
+                "en": "API key for CSAS",
+                "cs": "API key for CSAS"
+            },
+            "required": true,
+            "category": "Other"
         },
         "CSAS_ACCESS_TOKEN": {
             "type": "text",
-            "description": "Access token for CSAS",
-            "required": true
+            "description": {
+                "en": "Access token for CSAS",
+                "cs": "Access token for CSAS"
+            },
+            "required": true,
+            "category": "Security"
         },
         "CSAS_ACCOUNT_IBAN": {
             "type": "text",
-            "description": "IBAN of the CSAS account",
-            "required": false
+            "description": {
+                "en": "IBAN of the CSAS account",
+                "cs": "IBAN of the CSAS account"
+            },
+            "required": false,
+            "category": "Other"
         },
         "CSAS_ACCOUNT_UUID": {
             "type": "text",
-            "description": "UUID of the CSAS account",
-            "required": false
+            "description": {
+                "en": "UUID of the CSAS account",
+                "cs": "UUID of the CSAS account"
+            },
+            "required": false,
+            "category": "Other"
         },
         "CSAS_SANDBOX_MODE": {
             "type": "bool",
-            "description": "Enable sandbox mode for CSAS",
+            "description": {
+                "en": "Enable sandbox mode for CSAS",
+                "cs": "Enable sandbox mode for CSAS"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "CSAS_API_DEBUG": {
             "type": "bool",
-            "description": "Enable API debug mode",
+            "description": {
+                "en": "Enable API debug mode",
+                "cs": "Enable API debug mode"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Behavior"
         },
         "APP_DEBUG": {
             "type": "bool",
-            "description": "Enable application debug mode",
+            "description": {
+                "en": "Enable application debug mode",
+                "cs": "Enable application debug mode"
+            },
             "defval": false,
-            "required": false
+            "required": false,
+            "category": "Behavior"
         },
         "ACCOUNT_NUMBER": {
             "type": "text",
-            "description": "Bank Account Number",
+            "description": {
+                "en": "Bank Account Number",
+                "cs": "Bank Account Number"
+            },
             "defval": "",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "ACCOUNT_CURRENCY": {
             "type": "text",
-            "description": "for multicurrency accounts please specify one",
+            "description": {
+                "en": "for multicurrency accounts please specify one",
+                "cs": "for multicurrency accounts please specify one"
+            },
             "defval": "CZK",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "REPORT_SCOPE": {
             "type": "text",
-            "description": "Time scope of transactions downloaded",
+            "description": {
+                "en": "Time scope of transactions downloaded",
+                "cs": "Time scope of transactions downloaded"
+            },
             "defval": "last_month",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "STATEMENT_FORMAT": {
             "type": "set",
-            "description": "pdf or xml",
+            "description": {
+                "en": "pdf or xml",
+                "cs": "pdf or xml"
+            },
             "defval": "xml",
             "options": {
                 "pdf": "PDF",
                 "xml": "XML"
             },
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "RESULT_FILE": {
             "type": "string",
-            "description": "write output json data to",
+            "description": {
+                "en": "write output json data to",
+                "cs": "write output json data to"
+            },
             "defval": "transaction_report_{ACCOUNT_NUMBER}.json",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "ZABBIX_KEY": {
             "type": "string",
-            "description": "Default name for Zabbix Item key name",
+            "description": {
+                "en": "Default name for Zabbix Item key name",
+                "cs": "Default name for Zabbix Item key name"
+            },
             "defval": "Raiff-Balance-{ACCOUNT_NUMBER}",
-            "required": false
+            "required": false,
+            "category": "Other"
         },
         "EASE_LOGGER": {
             "type": "string",
-            "description": "write log messages using",
+            "description": {
+                "en": "write log messages using",
+                "cs": "write log messages using"
+            },
             "defval": "console|syslog",
-            "required": false
+            "required": false,
+            "category": "Behavior"
         }
     },
-    "multiflexi": "2.0.0"
+    "artifacts": [
+        {
+            "name": "Transaction report",
+            "type": "file",
+            "description": {
+                "en": "Generated bank statements",
+                "cs": "Generated bank statements"
+            },
+            "path": "^transaction_report_[A-Za-z0-9]+\\.json$"
+        }
+    ]
 }
