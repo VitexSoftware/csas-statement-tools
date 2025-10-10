@@ -16,8 +16,6 @@
         "Downloader"
     ],
     "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
-    "image": "",
-    "ociimage": "",
     "executable": "csas-statement-downloader",
     "environment": {
         "CSAS_API_KEY": {
