@@ -82,7 +82,7 @@ https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-cor
 
 Validate configurations using:
 ```bash
-multiflexi-cli application validate-json --json multiflexi/[filename].app.json
+multiflexi-cli application validate-json --file multiflexi/[filename].app.json
 ```
 
 **Recent Schema Updates (September 2025):**

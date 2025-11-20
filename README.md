@@ -288,3 +288,11 @@ See Also
 * [fiobank-statement-tools](https://github.com/Spoje-NET/fiobank-statement-tools)
 * [raiffeisenbank-statement-tools](https://github.com/Spoje-NET/raiffeisenbank-statement-tools)
 * [kb-statement-tools](https://github.com/Spoje-NET/kb-statement-tools)
+
+## Exit Codes
+
+Applications in this package use the following exit codes:
+
+- `0`: Success
+- `1`: General error
+- `5`: Application-specific error

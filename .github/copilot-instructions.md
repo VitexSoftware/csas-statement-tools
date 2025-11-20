@@ -1,39 +1,66 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+# Copilot Instructions for ČSAS Statement Tools
 
-All code comments should be written in English.
+## Project Context
+- **Purpose:** Tools for downloading and processing bank statements from ČSAS (Československá obchodní banka)
+- **Integration:** Works with MultiFlexi framework for automated statement import
+- **Technology:** PHP with ČSAS Open Banking API integration
 
-All messages, including error messages, should be written in English.
+## ⚠️ CRITICAL: ČSAS Token Management
+- **Token Lifespan:** ČSAS access tokens expire after **only 5 minutes**
+- **Before Development:** Always run `make token` to refresh access token
+- **Authentication Errors:** Usually means token expired - refresh immediately
+- **Token Location:** Stored in `.env` as `CSAS_ACCESS_TOKEN`
 
-When writing code, always include a docblock for functions and classes, describing their purpose, parameters, and return types.
+```bash
+# Always refresh token before API work
+make token
 
-When writing documentation, use Markdown format.
+# Check token status
+make check-token
+```
 
-When writing commit messages, use the imperative mood and keep them concise.
+## Schema Compliance
+- **MultiFlexi JSON files** (`multiflexi/*.app.json`) must conform to:
+  - https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
+- **Report files** must conform to:
+  - https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.report.schema.json
 
-When writing code comments, use complete sentences and proper grammar.
+## Code Quality Standards
 
-When writing code, always use meaningful variable names that describe their purpose.
+### Language & Documentation
+- **Comments:** English only
+- **Messages:** English only (including errors)
+- **Docblocks:** Required for all functions/classes (purpose, parameters, returns)
+- **Documentation:** Markdown format
+- **Testing:** Unit tests for all new/modified classes
 
-When writing code, avoid using magic numbers or strings; instead, define constants for them.
+### Development Best Practices
+- **Variables:** Meaningful, descriptive names
+- **Constants:** Replace magic numbers/strings
+- **Exceptions:** Proper handling with meaningful messages
+- **Type Safety:** Type hints for parameters and returns
+- **Security:** Never expose sensitive banking data or tokens
+- **Performance:** Optimize for API rate limits and token expiration
+- **Compatibility:** Latest PHP and library versions
 
-When writing code, always handle exceptions properly and provide meaningful error messages.
+## Validation Process
+- **PHP Syntax:** After every edit, **mandatory** run:
+  ```bash
+  php -l <filename>
+  ```
 
-When writing code, always include type hints for function parameters and return types.
+## Development Workflow
+```bash
+# 1. Refresh ČSAS token (critical!)
+make token
 
-When writing code, always ensure that it is secure and does not expose any sensitive information.
+# 2. Test statement download
+php src/statement-download.php
 
-When writing code, always consider performance and optimize where necessary.
+# 3. Validate configuration
+multiflexi-cli application validate-json --file multiflexi/csas-tools.app.json
 
-When writing code, always ensure that it is compatible with the latest version of PHP and the libraries we are using.
+# 4. Run tests
+vendor/bin/phpunit tests/
+```
 
-When writing code, always ensure that it is well-tested and includes unit tests where applicable.
-
-When writing code, always ensure that it is maintainable and follows best practices.
-
-When create new class or update existing class, always create or update its unittest test files.
-
-All files in the multiflexi/*.app.json directory must conform to the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json
-
-All produced reports must conform to the schema available at: https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.report.schema.json
-
-⚠️ **CRITICAL ČSAS TOKEN MANAGEMENT**: ČSAS access tokens expire after only 5 minutes! Before any development, testing, or debugging involving ČSAS API calls, always run `make token` to refresh the access token. If authentication errors occur, the token has likely expired and must be refreshed immediately. The token is stored in `.env` as `CSAS_ACCESS_TOKEN`.

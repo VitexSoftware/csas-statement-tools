@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-    "schemaVersion": "3.0.0",
+    "schemaVersion": "3.1.0",
     "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
     "name": {
         "en": "ČSas statement downloader",
@@ -186,5 +186,31 @@
                 "cs": "Directory to save statements"
             }
         }
-    ]
+    ],
+    "exitCodes": {
+        "0": {
+            "description": {
+                "en": "Success",
+                "cs": "Úspěch"
+            },
+            "severity": "success",
+            "retry": false
+        },
+        "1": {
+            "description": {
+                "en": "General error",
+                "cs": "Obecná chyba"
+            },
+            "severity": "error",
+            "retry": true
+        },
+        "5": {
+            "description": {
+                "en": "Application-specific error code 5",
+                "cs": "Aplikační chybový kód 5"
+            },
+            "severity": "error",
+            "retry": true
+        }
+    }
 }
