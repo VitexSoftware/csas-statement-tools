@@ -1,0 +1,239 @@
+{
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.1.0",
+    "uuid": "bd700603-7a49-431c-8e30-97dbf1bddb41",
+    "name": {
+        "en": "ČSas statement mailer",
+        "cs": "ČSas statement mailer"
+    },
+    "description": {
+        "en": "Download Csas statements in given format and send it via email",
+        "cs": "Download Csas statements in given format and odeslat it via ee-mail"
+    },
+    "tags": [
+        "Csas",
+        "Mail",
+        "Statements"
+    ],
+    "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
+    "executable": "csas-statement-mailer",
+    "environment": {
+        "CSAS_API_KEY": {
+            "type": "text",
+            "description": {
+                "en": "API key for CSAS",
+                "cs": "API key for CSAS"
+            },
+            "required": true,
+            "category": "Other"
+        },
+        "CSAS_ACCESS_TOKEN": {
+            "type": "text",
+            "description": {
+                "en": "Access token for CSAS",
+                "cs": "Access token for CSAS"
+            },
+            "required": true,
+            "category": "Security"
+        },
+        "CSAS_ACCOUNT_IBAN": {
+            "type": "text",
+            "description": {
+                "en": "IBAN of the CSAS account",
+                "cs": "IBAN of the CSAS account"
+            },
+            "required": true,
+            "category": "Other"
+        },
+        "CSAS_ACCOUNT_UUID": {
+            "type": "text",
+            "description": {
+                "en": "UUID of the CSAS account",
+                "cs": "UUID of the CSAS account"
+            },
+            "required": true,
+            "category": "Other"
+        },
+        "CSAS_SANDBOX_MODE": {
+            "type": "bool",
+            "description": {
+                "en": "Enable sandbox mode for CSAS",
+                "cs": "Enable sandbox mode for CSAS"
+            },
+            "defval": false,
+            "required": false,
+            "category": "Other"
+        },
+        "CSAS_API_DEBUG": {
+            "type": "bool",
+            "description": {
+                "en": "Enable API debug mode",
+                "cs": "Enable API debug mode"
+            },
+            "defval": false,
+            "required": false,
+            "category": "Behavior"
+        },
+        "APP_DEBUG": {
+            "type": "bool",
+            "description": {
+                "en": "Enable application debug mode",
+                "cs": "Enable application debug mode"
+            },
+            "defval": false,
+            "required": false,
+            "category": "Behavior"
+        },
+        "IMPORT_SCOPE": {
+            "type": "text",
+            "description": {
+                "en": "Time scope of transactions downloaded",
+                "cs": "Time scope of transactions downloaded"
+            },
+            "defval": "auto",
+            "required": false,
+            "category": "Other"
+        },
+        "STATEMENTS_DIR": {
+            "type": "text",
+            "description": {
+                "en": "Directory to save statements",
+                "cs": "Directory to save statements"
+            },
+            "defval": ".",
+            "required": false,
+            "category": "Other"
+        },
+        "STATEMENT_FORMAT": {
+            "type": "set",
+            "description": {
+                "en": "pdf or xml",
+                "cs": "pdf or xml"
+            },
+            "defval": "pdf",
+            "options": {
+                "pdf": "PDF",
+                "xml": "XML",
+                "xml-data": "XML Data",
+                "abo-standard": "ABO Standard",
+                "abo-internal": "ABO Internal",
+                "abo-standard-extended": "ABO Standard Extended",
+                "abo-internal-extended": "ABO Internal Extended",
+                "csv-comma": "CSV Comma",
+                "csv-semicolon": "CSV Semicolon",
+                "mt940": "MT940"
+            },
+            "required": false,
+            "category": "Other"
+        },
+        "ACCOUNT_CURRENCY": {
+            "type": "text",
+            "description": {
+                "en": "for multicurrency accounts please specify one",
+                "cs": "for multicurrency accounts please specify one"
+            },
+            "defval": "CZK",
+            "required": false,
+            "category": "Other"
+        },
+        "RESULT_FILE": {
+            "type": "string",
+            "description": {
+                "en": "write output json data to",
+                "cs": "write output json data to"
+            },
+            "defval": "csas_statement_mailer.json",
+            "required": false,
+            "category": "Other"
+        },
+        "EASE_LOGGER": {
+            "type": "string",
+            "description": {
+                "en": "write log messages using",
+                "cs": "write log messages using"
+            },
+            "defval": "console|syslog",
+            "required": false,
+            "category": "Behavior"
+        },
+        "STATEMENTS_TO": {
+            "type": "email",
+            "description": {
+                "en": "Recipient's email address",
+                "cs": "Recipient's email address"
+            },
+            "defval": "",
+            "required": true,
+            "category": "Other"
+        },
+        "STATEMENTS_FROM": {
+            "type": "email",
+            "description": {
+                "en": "Sender's email address",
+                "cs": "Odeslater's ee-mail address"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Other"
+        },
+        "STATEMENTS_REPLYTO": {
+            "type": "email",
+            "description": {
+                "en": "Reply-To email address",
+                "cs": "Reply-To email address"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Other"
+        },
+        "STATEMENTS_CC": {
+            "type": "email",
+            "description": {
+                "en": "CC email address",
+                "cs": "CC email address"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Other"
+        },
+        "CSAS_GENERATE_EMPTY_STATEMENTS": {
+            "type": "bool",
+            "description": {
+                "en": "Generate and mail mock statements when no transactions are available for the period",
+                "cs": "Generate and mail mock statements when no transactions are available for the period"
+            },
+            "defval": false,
+            "required": false,
+            "category": "Other"
+        }
+    },
+    "artifacts": [
+        {
+            "name": "Statements report",
+            "type": "file",
+            "description": {
+                "en": "Generated bank statements",
+                "cs": "Generated bank statements"
+            },
+            "path": "csas_statement_mailer.json"
+        }
+    ],
+    "exitCodes": {
+        "0": {
+            "description": {
+                "en": "Success",
+                "cs": "Úspěch"
+            },
+            "severity": "success",
+            "retry": false
+        },
+        "1": {
+            "description": {
+                "en": "General error",
+                "cs": "Obecná chyba"
+            },
+            "severity": "error",
+            "retry": true
+        }
+    }
+}

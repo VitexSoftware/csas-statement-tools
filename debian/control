@@ -15,6 +15,6 @@ Description: Download your Česká Spořitelna Bank Statements
 
 Package: multiflexi-csas-statement-tools
 Architecture: all
-Depends: csas-statement-tools, multiflexi
+Depends: csas-statement-tools, multiflexi-cli
 Description: Česká Spořitelna Bank statement tools to MultiFlexi
  Allow use of Česká Spořitelna Bank statement tools in MultiFlexi environment
