@@ -6,11 +6,22 @@
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
 %:
-	dh $@
+	dh $@ --with phpcomposer
+
+override_dh_auto_build:
+	# Generate custom Debian autoloader for application
+	cat > debian/autoload.php <<'AUTOLOADER'
+	<?php
+	// Debian autoloader for csas-statement-tools
+	require_once '/usr/share/php/CSasAccounts/autoload.php';
+	// No application-specific classes to autoload
+	AUTOLOADER
 
 override_dh_install:
 	dh_install
-	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/csas-statement-tools/g'   debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
+	# Install Debian autoloader
+	install -D -m 0644 debian/autoload.php debian/csas-statement-tools/usr/share/php/csas-statement-tools/autoload.php
+	sed -i -e 's/..../\/usr\/share\/php\/csas-statement-tools/g'   debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
 	sed -i -e 's/\.\.\/.env//g'  debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  debian/conf/composer.json |sponge debian/csas-statement-tools/usr/lib/csas-statement-tools/composer.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/cs_balance.multiflexi.app.json |sponge debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_balance.multiflexi.app.json
