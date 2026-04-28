@@ -42,14 +42,12 @@ if (Shr::cfg('APP_DEBUG', false)) {
     $engine->logBanner();
 }
 
-$apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClient(
-    [
-        'apikey' => Shr::cfg('CSAS_API_KEY'),
-        'token' => Shr::cfg('CSAS_ACCESS_TOKEN'),
-        'debug' => Shr::cfg('CSAS_API_DEBUG', false),
-        'sandbox' => Shr::cfg('CSAS_SANDBOX_MODE'),
-    ],
-));
+$apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClient([
+    'apikey' => Shr::cfg('CSAS_API_KEY'),
+    'token' => Shr::cfg('CSAS_ACCESS_TOKEN'),
+    'debug' => Shr::cfg('CSAS_API_DEBUG', false),
+    'sandbox' => Shr::cfg('CSAS_SANDBOX_MODE'),
+],));
 
 $report = ['currencyFolders' => []];
 

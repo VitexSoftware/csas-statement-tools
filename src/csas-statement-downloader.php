@@ -38,14 +38,12 @@ $destination = \array_key_exists('output', $options) ? $options['output'] : (\ar
 $format = \array_key_exists('format', $options) ? $options['format'] : (\array_key_exists('f', $options) ? $options['f'] : \Ease\Shared::cfg('STATEMENT_FORMAT', 'pdf'));
 $saveTo = \array_key_exists('destination', $options) ? $options['destination'] : (\array_key_exists('d', $options) ? $options['d'] : \Ease\Shared::cfg('STATEMENTS_DIR', getcwd()));
 
-$apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClient(
-    [
-        'apikey' => Shr::cfg('CSAS_API_KEY'),
-        'token' => Shr::cfg('CSAS_ACCESS_TOKEN'),
-        'debug' => Shr::cfg('CSAS_API_DEBUG', false),
-        'sandbox' => Shr::cfg('CSAS_SANDBOX_MODE'),
-    ],
-));
+$apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClient([
+    'apikey' => Shr::cfg('CSAS_API_KEY'),
+    'token' => Shr::cfg('CSAS_ACCESS_TOKEN'),
+    'debug' => Shr::cfg('CSAS_API_DEBUG', false),
+    'sandbox' => Shr::cfg('CSAS_SANDBOX_MODE'),
+],));
 
 $accountId = Shr::cfg('CSAS_ACCOUNT_UUID');
 $accountIban = Shr::cfg('CSAS_ACCOUNT_IBAN');
