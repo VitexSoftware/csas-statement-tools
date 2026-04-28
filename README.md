@@ -261,7 +261,7 @@ All MultiFlexi application definitions have been updated to comply with the late
 
 - **Artifacts Structure**: Changed from object format to array format as required by MultiFlexi 2.0.0 schema
 - **Environment Variable Types**: Updated `STATEMENT_FORMAT` type from deprecated `"select"` to compliant `"set"` type
-- **Schema Validation**: All JSON files now pass strict schema validation using `multiflexi-cli application validate-json`
+- **Schema Validation**: All JSON files now pass strict schema validation using `multiflexi-cli application:validate-json`
 
 The following applications are available:
 - `cs_balance.multiflexi.app.json` - Balance checking application
