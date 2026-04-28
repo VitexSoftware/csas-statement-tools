@@ -1,4 +1,4 @@
-debian/conf/composer.json       usr/lib/csas-statement-tools/
+composer.json       		usr/lib/csas-statement-tools/
 src/*			        usr/lib/csas-statement-tools/
 #src/SpojeNet/*                 usr/lib/csas-statement-tools/SpojeNet/
 bin/*                           usr/bin/
