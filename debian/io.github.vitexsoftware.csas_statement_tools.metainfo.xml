@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop-application">
+<component type="console-application">
   <id>io.github.vitexsoftware.csas_statement_tools</id>
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
-  <name>csas-statement-tools</name>
+  <name>CSas Statement Tools</name>
   <summary>Download your Česká Spořitelna Bank Statements</summary>
   <description>
     <p>
-      Download statements to disk in requested format and within given time Allow use of Česká Spořitelna Bank statement tools in MultiFlexi environment
+      Command-line tools for downloading and mailing bank statements from
+      Česká Spořitelna (CSAS) via the CSAS API. Supports multiple output
+      formats and MultiFlexi integration.
     </p>
   </description>
-  <categories>
-    <category>Utility</category>
-  </categories>
+  <provides>
+    <binary>csas-statement-downloader</binary>
+    <binary>csas-statement-mailer</binary>
+    <binary>csas-balance</binary>
+    <binary>csas-transaction-report</binary>
+  </provides>
   <url type="homepage">https://github.com/VitexSoftware/csas-statement-tools</url>
   <url type="bugtracker">https://github.com/VitexSoftware/csas-statement-tools/issues</url>
   <developer id="cz.vitexsoftware">

@@ -1,5 +1,4 @@
-composer.json       		usr/lib/csas-statement-tools/
-src/*			        usr/lib/csas-statement-tools/
+src/*                                       usr/lib/csas-statement-tools/
 #src/SpojeNet/*                 usr/lib/csas-statement-tools/SpojeNet/
 bin/*                           usr/bin/
 .env.example                    usr/share/doc/csas-statement-tools

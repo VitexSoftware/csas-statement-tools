@@ -2,13 +2,16 @@ Source: csas-statement-tools
 Section: unknown
 Priority: optional
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
-Build-Depends: debhelper-compat (= 12), jq, moreutils, pkg-php-tools
-Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 13), jq, appstream
+Standards-Version: 4.7.0
 Homepage: https://github.com/VitexSoftware/csas-statement-tools
 
 Package: csas-statement-tools
 Architecture: all
-Depends: ${misc:Depends}, php-spojenet-csas-accountsapi (>=0.7.2)
+Depends:
+ ${misc:Depends},
+ php-spojenet-csas-accountsapi (>= 0.7.2),
+ php-vitexsoftware-ease-core
 Suggests: multiflexi
 Description: Download your Česká Spořitelna Bank Statements
  Download statements to disk in requested format and within given time

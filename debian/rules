@@ -1,21 +1,29 @@
 #!/usr/bin/make -f
-# You must remove unused comment lines for the released package.
-#export DH_VERBOSE = 1
-#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
-#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
-#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+PKG_VERSION := $(shell dpkg-parsechangelog -S Version | sed 's/~.*//')
+PKG_SOURCE  := $(shell jq -r '.name' composer.json)
+PKG_TYPE    := $(shell jq -r '.type' composer.json)
 
 %:
-	dh $@ --with phpcomposer
+	dh $@
 
 override_dh_install:
 	dh_install
-	# Install Debian autoloader
-	install -D -m 0644 debian/autoload.php debian/csas-statement-tools/usr/share/php/csas-statement-tools/autoload.php
-	sed -i -e 's/..../\/usr\/share\/php\/csas-statement-tools/g'   debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
-	sed -i -e 's/\.\.\/.env//g'  debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  composer.json |sponge debian/csas-statement-tools/usr/lib/csas-statement-tools/composer.json
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/cs_balance.multiflexi.app.json |sponge debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_balance.multiflexi.app.json
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/cs_statement_downloader.multiflexi.app.json |sponge debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_statement_downloader.multiflexi.app.json
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/cs_statement_mailer.multiflexi.app.json |sponge debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_statement_mailer.multiflexi.app.json
-	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/cs_transaction_report.multiflexi.app.json |sponge debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_transaction_report.multiflexi.app.json
+	install -m 644 debian/autoload.php \
+	    debian/csas-statement-tools/usr/lib/csas-statement-tools/autoload.php
+	sed -i "s|require_once '../vendor/autoload.php';|require_once '/usr/lib/csas-statement-tools/autoload.php';|" \
+	    debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
+	sed -i "s|'../.env'|''|" \
+	    debian/csas-statement-tools/usr/lib/csas-statement-tools/*.php
+	jq '.version = "$(PKG_VERSION)"' multiflexi/cs_balance.multiflexi.app.json \
+	    > debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_balance.multiflexi.app.json
+	jq '.version = "$(PKG_VERSION)"' multiflexi/cs_statement_downloader.multiflexi.app.json \
+	    > debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_statement_downloader.multiflexi.app.json
+	jq '.version = "$(PKG_VERSION)"' multiflexi/cs_statement_mailer.multiflexi.app.json \
+	    > debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_statement_mailer.multiflexi.app.json
+	jq '.version = "$(PKG_VERSION)"' multiflexi/cs_transaction_report.multiflexi.app.json \
+	    > debian/multiflexi-csas-statement-tools/usr/lib/csas-statement-tools/multiflexi/cs_transaction_report.multiflexi.app.json
+
+override_dh_auto_test:
+	appstreamcli validate --pedantic --no-net \
+	    debian/io.github.vitexsoftware.csas_statement_tools.metainfo.xml
