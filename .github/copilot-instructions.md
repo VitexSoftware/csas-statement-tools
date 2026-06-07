@@ -58,7 +58,7 @@ make token
 php src/statement-download.php
 
 # 3. Validate configuration
-multiflexi-cli application validate-json --file multiflexi/csas-tools.app.json
+multiflexi-cli application:validate-json --file multiflexi/csas-tools.app.json
 
 # 4. Run tests
 vendor/bin/phpunit tests/
