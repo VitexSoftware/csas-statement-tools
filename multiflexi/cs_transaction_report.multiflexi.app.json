@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
-  "schemaVersion": "3.2.1",
+  "schemaVersion": "3.4.0",
   "uuid": "d82ef26e-2bfc-4171-ad92-4eae643a5249",
   "name": {
     "en": "ČSas transaction report",
@@ -20,6 +20,19 @@
   ],
   "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
   "executable": "csas-transaction-report",
+  "events": {
+    "consumes": {
+      "bank.statement.downloaded": {
+        "description": "A bank statement file was downloaded",
+        "format": "file"
+      }
+    },
+    "emits": {
+      "bank.transaction.reported": {
+        "description": "A bank transaction report was produced"
+      }
+    }
+  },
   "environment": {
     "CSAS_API_KEY": {
       "type": "string",
@@ -102,7 +115,6 @@
       "description": {
         "en": "for multicurrency accounts please specify one",
         "cs": "Pro více měnové účty prosím specifikujte jednu"
-
       },
       "defval": "CZK",
       "required": false,

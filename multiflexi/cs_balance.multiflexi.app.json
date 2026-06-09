@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
-  "schemaVersion": "3.2.1",
+  "schemaVersion": "3.4.0",
   "uuid": "e7df927a-a30e-40fe-ac3e-d4e547be8f95",
   "name": {
     "en": "ČSas Balance",
@@ -18,6 +18,13 @@
   ],
   "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
   "executable": "csas-balance",
+  "events": {
+    "emits": {
+      "bank.balance.checked": {
+        "description": "An account balance was retrieved"
+      }
+    }
+  },
   "environment": {
     "CSAS_API_KEY": {
       "type": "string",

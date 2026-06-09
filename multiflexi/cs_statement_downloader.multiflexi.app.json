@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/schema/application.json",
-  "schemaVersion": "3.2.1",
+  "schemaVersion": "3.4.0",
   "uuid": "589dfb07-eb27-450e-95c6-3e8edfd1e7d2",
   "name": {
     "en": "ČSas statement downloader",
@@ -17,6 +17,13 @@
   ],
   "homepage": "https://github.com/VitexSoftware/csas-statement-tools",
   "executable": "csas-statement-downloader",
+  "events": {
+    "emits": {
+      "bank.statement.downloaded": {
+        "description": "A bank statement file was downloaded"
+      }
+    }
+  },
   "environment": {
     "CSAS_API_KEY": {
       "type": "string",
