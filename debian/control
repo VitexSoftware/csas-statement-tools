@@ -2,7 +2,7 @@ Source: csas-statement-tools
 Section: unknown
 Priority: optional
 Maintainer: Vítězslav Dvořák <info@vitexsoftware.cz>
-Build-Depends: debhelper-compat (= 13), jq, appstream
+Build-Depends: debhelper-compat (= 13), pkg-php-tools, jq, appstream
 Standards-Version: 4.7.0
 Homepage: https://github.com/VitexSoftware/csas-statement-tools
 
