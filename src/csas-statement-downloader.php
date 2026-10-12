@@ -46,7 +46,7 @@ $apiInstance = new \SpojeNet\CSas\Accounts\DefaultApi(new \SpojeNet\CSas\ApiClie
 ],));
 
 $accountId = Shr::cfg('CSAS_ACCOUNT_UUID');
-$accountIban = Shr::cfg('CSAS_ACCOUNT_IBAN');
+$accountIban = (string) Shr::cfg('CSAS_ACCOUNT_IBAN', '');
 
 if (empty($accountId)) {
     if ($accountIban) {
@@ -54,20 +54,32 @@ if (empty($accountId)) {
         $account = Statementor::getAccountByIban($apiInstance, $accountIban);
 
         if (!$account) {
-            $report['message'] = sprintf(_('Account not found for IBAN: %s'), Shr::cfg('CSAS_ACCOUNT_IBAN'));
-            $exitcode = 5;
+            fwrite(\STDERR, sprintf(_('Account not found for IBAN: %s'), $accountIban)."\n");
 
-            throw new \InvalidArgumentException($report['message']);
+            exit(5);
         }
 
         $accountId = $account->getId();
     } else {
-        $report['message'] = _('No CSAS_ACCOUNT_UUID or CSAS_ACCOUNT_IBAN provided');
-        $exitcode = 1;
+        fwrite(\STDERR, _('No CSAS_ACCOUNT_UUID or CSAS_ACCOUNT_IBAN provided')."\n");
+
+        exit(1);
     }
+} elseif ($accountIban === '') {
+    // Only the UUID is known: take the IBAN from the account, the Statementor needs it for file names
+    $account = Statementor::getAccountById($apiInstance, $accountId);
+
+    if (!$account) {
+        fwrite(\STDERR, sprintf(_('Account not found for UUID: %s'), $accountId)."\n");
+
+        exit(5);
+    }
+
+    $accountIban = (string) $account->getIdentification()->getIban();
 }
 
-$engine = new Statementor($accountId, $accountIban, Shr::cfg('CSAS_STATEMENT_SCOPE', 'last_month'));
+// CSAS_STATEMENT_SCOPE, IMPORT_SCOPE (named so in the MultiFlexi application definition) is accepted too
+$engine = new Statementor($accountId, $accountIban, Shr::cfg('CSAS_STATEMENT_SCOPE', Shr::cfg('IMPORT_SCOPE', 'last_month')));
 
 if (Shr::cfg('APP_DEBUG', false)) {
     $engine->logBanner($engine->getAccountNumber().' '.$engine->getScopeSymbolic());
